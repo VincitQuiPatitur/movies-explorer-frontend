@@ -6,6 +6,7 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import React from "react";
 import Register from "../Register/Register";
+import Footer from "../Footer/Footer";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                         path='/signup'
                         element={<Register />}/>
                 </Routes>
+                <Footer />
             </div>
         </div>
     );

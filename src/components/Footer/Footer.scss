@@ -1,0 +1,53 @@
+@import "../../pages/variables.scss";
+
+.footer {
+  width: 100%;
+  min-height: 172px;
+  @include flexible-center;
+  flex-direction: column;
+
+
+  &__info {
+    padding: 20px;
+    margin: 59px 0 0 0;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    width: 100%;
+    border-bottom: 1px solid $line-color;
+    text-align: center;
+    color: $dark-text-color;
+    box-sizing: border-box;
+  }
+
+  &__under-line {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    padding: 20px 0;
+    box-sizing: border-box;
+  }
+
+  &__copyright {
+    margin: 0;
+  }
+
+  &__links {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__link {
+    color: $text-color;
+    text-decoration: none;
+    transition: opacity .3s ease-out;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+}
