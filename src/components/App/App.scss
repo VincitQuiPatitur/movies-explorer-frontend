@@ -9,6 +9,8 @@
 
   &__content {
     margin: 0 auto;
+    padding: 0 70px;
+    box-sizing: border-box;
     max-width: 1280px;
     color: $text-color;
     font-family: 'Inter', serif;

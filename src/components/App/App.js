@@ -7,11 +7,13 @@ import Login from "../Login/Login";
 import React from "react";
 import Register from "../Register/Register";
 import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 function App() {
     return (
         <div className="app">
             <div className="app__content">
+                <Header />
                 <Routes>
                     <Route
                         path='/'

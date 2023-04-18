@@ -1,0 +1,76 @@
+@import "../../pages/variables.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 74px;
+
+  &__menu {
+    @include flexible-center;
+    gap: 30px;
+  }
+
+  &__navbar {
+    @include flexible-center;
+    gap: 16px;
+    list-style: none;
+  }
+
+  &__profile {
+    @include flexible-center;
+    gap: 17px;
+
+    &-button {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      color: $text-color;
+    }
+  }
+
+  &__signup {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  &__signin {
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    box-sizing: border-box;
+    background-color: $green-button;
+    color: $black-text;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+
+  &__navbar-link {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+
+    &-item {
+      color: $text-color;
+      text-decoration: none;
+    }
+
+    &_active {
+      font-weight: 500;
+    }
+  }
+
+  &__logo-block {
+    background-color: $inactive-icon;
+    border-radius: 4px;
+    width: 26px;
+    height: 30px;
+    @include flexible-center;
+  }
+}
