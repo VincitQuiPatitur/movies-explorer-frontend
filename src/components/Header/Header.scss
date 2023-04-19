@@ -1,11 +1,12 @@
 @import "../../pages/variables.scss";
 
 .header {
+  @include content-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   min-height: 74px;
+  z-index: 3;
 
   &__menu {
     @include flexible-center;

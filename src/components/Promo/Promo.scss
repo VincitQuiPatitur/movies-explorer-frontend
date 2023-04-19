@@ -1,0 +1,46 @@
+@import "../../pages/variables.scss";
+
+.promo {
+  width: 100%;
+  height: 648px;
+  background-color: $banner-background;
+  margin-top: -74px;
+
+  &__container {
+    @include content-box;
+    padding-top: 149px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: url(../../images/banner-image.svg) no-repeat right 70px top 149px;
+    background-size: 310px 304px;
+  }
+
+  &__title {
+    max-width: 640px;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    margin: 0;
+  }
+
+  &__subtitle {
+    max-width: 310px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    opacity: .5;
+    margin: 36px 0 0 0;
+  }
+
+  &__button {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 3px;
+    margin-top: 146px;
+    cursor: pointer;
+  }
+}

@@ -1,7 +1,7 @@
 @import "../../pages/variables.scss";
 
 .footer {
-  width: 100%;
+  @include content-box;
   min-height: 172px;
   @include flexible-center;
   flex-direction: column;

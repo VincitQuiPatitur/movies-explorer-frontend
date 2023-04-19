@@ -1,5 +1,5 @@
 import {Routes, Route} from "react-router-dom";
-import AboutProject from "../AboutProject/AboutProject";
+import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
@@ -12,31 +12,29 @@ import Header from "../Header/Header";
 function App() {
     return (
         <div className="app">
-            <div className="app__content">
-                <Header />
-                <Routes>
-                    <Route
-                        path='/'
-                        element={<AboutProject/>}
-                    />
-                    <Route
-                        path='/movies'
-                        element={<Movies/>}/>
-                    <Route
-                        path='/saved-movies'
-                        element={<SavedMovies />}/>
-                    <Route
-                        path='/profile'
-                        element={<Profile />}/>
-                    <Route
-                        path='/signin'
-                        element={<Login />}/>
-                    <Route
-                        path='/signup'
-                        element={<Register />}/>
-                </Routes>
-                <Footer />
-            </div>
+            <Header/>
+            <Routes>
+                <Route
+                    path='/'
+                    element={<Main/>}
+                />
+                <Route
+                    path='/movies'
+                    element={<Movies/>}/>
+                <Route
+                    path='/saved-movies'
+                    element={<SavedMovies/>}/>
+                <Route
+                    path='/profile'
+                    element={<Profile/>}/>
+                <Route
+                    path='/signin'
+                    element={<Login/>}/>
+                <Route
+                    path='/signup'
+                    element={<Register/>}/>
+            </Routes>
+            <Footer/>
         </div>
     );
 }
