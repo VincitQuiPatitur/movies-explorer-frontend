@@ -152,4 +152,16 @@
   background-color: #073042;
 }
 
+.technologies {
+  width: 100%;
+  background-color: #272727;
+  min-height: 625px;
+}
+.technologies__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 70px;
+  box-sizing: border-box;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -12,8 +12,8 @@ function Main() {
         <main className='main'>
             <Promo/>
             <AboutProject/>
-            <NavBar/>
             <Techs/>
+            <NavBar/>
             <AboutMe/>
             <Portfolio/>
         </main>

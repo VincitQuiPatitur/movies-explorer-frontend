@@ -1,0 +1,60 @@
+@import "../../pages/variables.scss";
+
+.technologies {
+  width: 100%;
+  background-color: $block-background;
+  min-height: 625px;
+
+  &__container {
+    @include content-box;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  &__information {
+    padding: 90px 0 100px;
+    @include flexible-center;
+    flex-direction: column;
+    gap: 26px;
+
+
+    &-title {
+      margin: 0;
+      font-weight: 400;
+      font-size: 50px;
+      line-height: 58px;
+      text-align: center;
+      letter-spacing: -0.04em;
+    }
+
+    &-text {
+      margin: 0;
+      max-width: 460px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: -0.04em;
+    }
+  }
+
+  &__list {
+    @include flexible-center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &-item {
+      width: 90px;
+      background-color: $timeline-background;
+      border-radius: 10px;
+      padding: 21px 0 20px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      letter-spacing: -0.04em;
+    }
+  }
+}
