@@ -1,4 +1,5 @@
 import React from "react";
+
 function SearchForm() {
     return (
         <section className="search">
@@ -8,8 +9,8 @@ function SearchForm() {
             </form>
             <div className="search__sorts">
                 <label className="search__sorts-switch">
-                    <input className="search__sorts-input" type="checkbox" />
-                        <span className="search__sorts-slider"></span>
+                    <input className="search__sorts-input" type="checkbox"/>
+                    <span className="search__sorts-slider"></span>
                 </label>
                 <p className="search__sorts-text">Короткометражки</p>
             </div>

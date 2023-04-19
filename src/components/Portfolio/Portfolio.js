@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import linkArrow from "../../images/link-arrow.svg";
+
 function Portfolio() {
     return (
         <section className='portfolio'>
