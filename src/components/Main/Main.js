@@ -11,8 +11,8 @@ function Main() {
     return (
         <main className='main'>
             <Promo/>
-            <NavBar/>
             <AboutProject/>
+            <NavBar/>
             <Techs/>
             <AboutMe/>
             <Portfolio/>

@@ -1,0 +1,83 @@
+@import "../../pages/variables.scss";
+
+.about {
+  min-height: 608px;
+  @include content-box;
+  padding-top: 110px;
+  padding-bottom: 110px;
+
+  &__title {
+    margin: 0;
+    width: 100%;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    padding-bottom: 23px;
+    border-bottom: 1px solid $light-line-color;
+  }
+
+  &__information {
+    @include flexible-center;
+    gap: 40px;
+    padding: 70px 0 110px;
+  }
+
+  &__article {
+
+    &-title {
+      margin: 0;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: -0.04em;
+    }
+
+    &-text {
+      margin: 26px 0 0;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  &__timeline {
+    @include flexible-center;
+
+    &-block:first-child {
+      width: 20%;
+    }
+
+    &-block:last-child {
+      width: 80%;
+    }
+
+    &-week {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      margin: 0;
+      padding: 9px 0;
+
+      &-backend {
+        background-color: $green-button;
+        color: $black-text;
+      }
+
+      &-frontend {
+        background-color: $timeline-background;
+      }
+    }
+
+    &-part {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      color: $dark-text-color;
+      margin: 14px 0 0;
+    }
+  }
+
+}
