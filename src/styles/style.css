@@ -164,4 +164,26 @@
   box-sizing: border-box;
 }
 
+.portfolio {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 70px;
+  box-sizing: border-box;
+  min-height: 425px;
+}
+.portfolio__title {
+  margin: 0;
+  color: #8B8B8B;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+}
+.portfolio__links {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
 /*# sourceMappingURL=style.css.map */

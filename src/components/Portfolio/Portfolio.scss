@@ -1,0 +1,56 @@
+@import "../../pages/variables.scss";
+
+.portfolio {
+  @include content-box;
+  min-height: 425px;
+
+  &__title {
+    margin: 0;
+    color: $dark-text-color;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  &__links {
+    padding: 50px 0 125px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+  }
+
+  &__link {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.04em;
+    border-bottom: 1px solid $line-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &-item {
+      text-decoration: none;
+      color: $text-color;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 19px;
+      transition: opacity .3s ease-in-out;
+
+      &:hover {
+        opacity: .6;
+      }
+    }
+
+    &-text {
+      margin: 0;
+    }
+
+    &-arrow {
+
+    }
+  }
+}
