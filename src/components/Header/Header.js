@@ -23,7 +23,7 @@ function Header() {
             }
 
             {/*Переделать на props.LoggedIn*/}
-            {location.pathname === '/1' &&
+            {location.pathname === '/movies' &&
                 <>
                     <ul className="header__navbar">
                         <li className="header__navbar-link header__navbar-link_active">
