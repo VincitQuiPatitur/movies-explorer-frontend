@@ -1,0 +1,100 @@
+@import "../../pages/variables.scss";
+
+.search {
+  width: 100%;
+  min-height: 247px;
+  padding: 60px 0 69px;
+  box-sizing: border-box;
+
+  &__form {
+    width: 100%;
+    position: relative;
+
+    &-input {
+      width: 100%;
+      height: 46px;
+      background-color: $input-background;
+      border-radius: 40px;
+      border: none;
+      color: $dark-text-color;
+      padding: 14px 108px 14px 22px;
+      box-sizing: border-box;
+    }
+
+    &-button {
+      padding: 0;
+      width: 80px;
+      height: 34px;
+      background-color: $blue-button;
+      border: none;
+      background-image: url(../../images/search-icon.svg);
+      background-repeat: no-repeat no-repeat;
+      background-position: center center;
+      border-radius: 48px;
+      position: absolute;
+      right: 6px;
+      top: 6px;
+    }
+  }
+
+  &__sorts {
+    @include flexible-center;
+    padding-top: 41px;
+    gap: 12px;
+
+    &-switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+    }
+
+    &-input {
+      display: none;
+    }
+
+    &-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: $inactive-tumbler;
+      -webkit-transition: .4s;
+      transition: .4s;
+      border-radius: 20px;
+
+      &:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: $darkened-text;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    &-input:checked + &-slider {
+      background-color: $active-tumbler;
+    }
+
+    &-input:checked + &-slider:before {
+      -webkit-transform: translateX(16px);
+      -ms-transform: translateX(16px);
+      transform: translateX(16px);
+      background-color: $text-color;
+    }
+
+    &-text {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+}
