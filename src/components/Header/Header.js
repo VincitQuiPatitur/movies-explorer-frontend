@@ -10,7 +10,6 @@ function Header() {
         <div className="header">
             <img src={headerLogo} alt="Логотип в виде зеленого круга с белой фигуркой" className="header__logo"/>
 
-            {/* Подумать, как сделать цвет всего хэдера зеленым, если это главная страница*/}
             {location.pathname === '/' &&
                 <div className="header__menu">
                     <Link className="header__signup" to='/signup'>
@@ -22,7 +21,7 @@ function Header() {
                 </div>
             }
 
-            {/*Переделать на props.LoggedIn*/}
+            {/* Header отображается пока только на /movies Переделать на props.LoggedIn, чтобы отображался после авторизации */}
             {location.pathname === '/movies' &&
                 <>
                     <ul className="header__navbar">
@@ -40,8 +39,7 @@ function Header() {
                     <div className="header__profile">
                         <Link className="header__profile-button" to='/profile'>Аккаунт</Link>
                         <div className="header__logo-block">
-                            <img src={profileAvatar} alt="Иконка в виде символа человека"
-                                 className="header__profile-logo"/>
+                            <img src={profileAvatar} alt="Иконка в виде символа человека" className="header__profile-logo"/>
                         </div>
                     </div>
                 </>

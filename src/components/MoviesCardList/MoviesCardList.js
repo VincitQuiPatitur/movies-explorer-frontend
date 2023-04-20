@@ -23,7 +23,12 @@ function MoviesCardList() {
                 <MoviesCard/>
                 <MoviesCard/>
             </ul>
-            <button className="movies-section__more">Ещё</button>
+            <div className="movies-section__more">
+                {// добавить условие: если видео в блоке >=16, отображать кнопку, если меньше, то span
+                }
+                <button className="movies-section__more-button">Ещё</button>
+                {/*<span className="movies-section__more-span"></span>*/}
+            </div>
         </section>
     );
 }
