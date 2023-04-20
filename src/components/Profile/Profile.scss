@@ -1,0 +1,90 @@
+@import "../../pages/variables.scss";
+
+.profile {
+  @include content-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 74px;
+  height: calc(100vh - $header-height);
+
+  &__greeting {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 123px 0 220px;
+    border: none;
+    margin: 0;
+
+    &-label {
+      width: 410px;
+      border-bottom: 1px solid $line-color;
+      font-weight: 500;
+      font-size: 11px;
+      line-height: 13px;
+      display: grid;
+      grid-template-columns: 141px auto;
+      padding: 17px 0 0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    &-input {
+      box-sizing: border-box;
+      outline: 0;
+      border: 0;
+      padding: 0;
+      background-color: $background-color;
+      width: 100%;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 13px;
+      color: $text-color;
+      text-align: right;
+    }
+
+    &-error {
+      text-align: center;
+      padding-top: 2px;
+      box-sizing: border-box;
+      display: inline-grid;
+      color: $red-color;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      height: 16px;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 13px;
+    }
+  }
+
+  &__update-button {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    border: none;
+    background-color: $background-color;
+    padding: 0;
+    color: $text-color;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+
+  &__signout-button {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $red-color;
+    text-decoration: none;
+  }
+}

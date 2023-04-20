@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 74px;
+  min-height: $header-height;
   z-index: 3;
 
   &__menu {
