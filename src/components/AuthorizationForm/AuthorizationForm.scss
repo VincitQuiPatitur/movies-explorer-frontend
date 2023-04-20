@@ -1,0 +1,83 @@
+@import "../../pages/variables.scss";
+
+.authorization__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    margin:0;
+    padding: 40px 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  &-fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0 0 65px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-text {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: $dark-text-color;
+    margin-bottom: 5px;
+  }
+
+  &-input {
+    outline: 0;
+    background-color: $background-color;
+    border: none;
+    border-bottom: 1px solid $line-color;
+    padding: 0 0 10px 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $text-color;
+  }
+  &-error {
+    color: $red-color;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    height: 12px;
+    padding: 6px 0;
+  }
+
+  &-button {
+    margin-top: 69px;
+    background-color: $blue-button;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 13px 0 15px;
+    color: $text-color;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.authorization__link {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0;
+  padding-top: 16px;
+
+  &-text {
+    color: $blue-button;
+    text-decoration: none;
+  }
+}
