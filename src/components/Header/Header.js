@@ -7,8 +7,14 @@ function Header() {
     const location = useLocation();
 
     return (
-        <div className="header">
-            <img src={headerLogo} alt="Логотип в виде зеленого круга с белой фигуркой" className="header__logo"/>
+        <header className="header">
+
+            {(location.pathname === '/' || location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile' ) &&
+                <Link to="/">
+                    <img src={headerLogo} alt="Логотип в виде зеленого круга с белой фигуркой" className="header__logo"/>
+                </Link>
+            }
+
 
             {location.pathname === '/' &&
                 <div className="header__menu">
@@ -21,8 +27,8 @@ function Header() {
                 </div>
             }
 
-            {/* Header отображается пока только на /movies Переделать на props.LoggedIn, чтобы отображался после авторизации */}
-            {location.pathname === '/movies' &&
+            {/* Переделать на props.LoggedIn */}
+            {(location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile' ) &&
                 <>
                     <ul className="header__navbar">
                         <li className="header__navbar-link header__navbar-link_active">
@@ -44,7 +50,7 @@ function Header() {
                     </div>
                 </>
             }
-        </div>
+        </header>
     );
 }
 
