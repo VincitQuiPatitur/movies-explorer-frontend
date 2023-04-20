@@ -2,6 +2,7 @@ import React from "react";
 import headerLogo from "../../images/logo-header.svg";
 import profileAvatar from "../../images/profile-avatar.svg"
 import {Link, useLocation} from "react-router-dom";
+import Logo from "../Logo/Logo";
 
 function Header() {
     const location = useLocation();
@@ -10,9 +11,7 @@ function Header() {
         <header className="header">
 
             {(location.pathname === '/' || location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile' ) &&
-                <Link to="/">
-                    <img src={headerLogo} alt="Логотип в виде зеленого круга с белой фигуркой" className="header__logo"/>
-                </Link>
+                <Logo />
             }
 
 
