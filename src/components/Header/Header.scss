@@ -13,11 +13,6 @@
     gap: 30px;
   }
 
-  &__navbar {
-    @include flexible-center;
-    gap: 16px;
-    list-style: none;
-  }
 
   &__profile {
     @include flexible-center;
@@ -50,21 +45,6 @@
     color: $black-text;
     border-radius: 3px;
     text-decoration: none;
-  }
-
-  &__navbar-link {
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 18px;
-
-    &-item {
-      color: $text-color;
-      text-decoration: none;
-    }
-
-    &_active {
-      font-weight: 500;
-    }
   }
 
   &__logo-block {

@@ -2,6 +2,7 @@ import React from "react";
 import profileAvatar from "../../images/profile-avatar.svg"
 import {Link, useLocation} from "react-router-dom";
 import Logo from "../Logo/Logo";
+import Navigation from "../Navigation/Navigation";
 
 function Header() {
     const location = useLocation();
@@ -26,18 +27,7 @@ function Header() {
                     {/* Переделать на props.LoggedIn */}
                     {(location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile') &&
                         <>
-                            <ul className="header__navbar">
-                                <li className="header__navbar-link header__navbar-link_active">
-                                    <Link className="header__navbar-link-item" to='/movies'>
-                                        Фильмы
-                                    </Link>
-                                </li>
-                                <li className="header__navbar-link">
-                                    <Link className="header__navbar-link-item" to='/saved-movies'>
-                                        Сохранённые фильмы
-                                    </Link>
-                                </li>
-                            </ul>
+                            <Navigation />
                             <div className="header__profile">
                                 <Link className="header__profile-button" to='/profile'>Аккаунт</Link>
                                 <div className="header__logo-block">

@@ -1,5 +1,4 @@
 import {Link, useLocation} from "react-router-dom";
-import headerLogo from "../../images/logo-header.svg";
 
 function AuthorizationForm(props) {
     const location = useLocation();

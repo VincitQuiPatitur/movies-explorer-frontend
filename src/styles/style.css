@@ -191,6 +191,26 @@
   flex-direction: column;
   list-style: none;
 }
+.navigation__navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+}
+.navigation__navbar-link {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+}
+.navigation__navbar-link-item {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.navigation__navbar-link_active {
+  font-weight: 500;
+}
+
 .search-form {
   min-height: 247px;
 }
