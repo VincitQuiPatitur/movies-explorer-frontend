@@ -6,8 +6,8 @@ function Footer() {
 
     return (
         <>
-            {(location.pathname !== '/profile' && location.pathname !== '/signin' && location.pathname !== '/signup') &&
-                <footer className="footer">
+            {(location.pathname === '/' || location.pathname === '/movies' || location.pathname === '/saved-movies') ?
+                (<footer className="footer">
                     <p className="footer__info">Учебный проект Яндекс.Практикум х BeatFilm.</p>
                     <div className="footer__under-line">
                         <p className="footer__copyright">&copy; 2023</p>
@@ -16,7 +16,8 @@ function Footer() {
                             <Link className="footer__link" to='https://github.com/'>GitHub</Link>
                         </div>
                     </div>
-                </footer>
+                </footer>)
+                : null
             }
         </>
     )
