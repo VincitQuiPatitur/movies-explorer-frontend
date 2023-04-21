@@ -8,6 +8,7 @@ import React from "react";
 import Register from "../Register/Register";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
     return (
@@ -33,6 +34,9 @@ function App() {
                 <Route
                     path='/signup'
                     element={<Register/>}/>
+                <Route
+                    path='/*'
+                    element={<NotFoundPage/>}/>
             </Routes>
             <Footer/>
         </div>

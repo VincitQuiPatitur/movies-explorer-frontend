@@ -1,0 +1,40 @@
+@import "../../pages/variables.scss";
+
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 246px 0 60px 0;
+  gap: 184px;
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__error {
+    margin: 0;
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 169px;
+    text-align: center;
+  }
+
+  &__description {
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  &__back {
+    text-decoration: none;
+    color: $blue-button;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+}
