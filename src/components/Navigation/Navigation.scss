@@ -1,0 +1,25 @@
+@import "../../pages/variables.scss";
+
+.navigation {
+
+  &__navbar {
+    @include flexible-center;
+    gap: 16px;
+    list-style: none;
+
+    &-link {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 18px;
+
+      &-item {
+        color: $text-color;
+        text-decoration: none;
+      }
+
+      &_active {
+        font-weight: 500;
+      }
+    }
+  }
+}
