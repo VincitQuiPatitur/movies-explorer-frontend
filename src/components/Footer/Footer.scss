@@ -8,8 +8,8 @@
 
 
   &__info {
-    padding: 20px;
-    margin: 59px 0 0 0;
+    padding: $portfolio-top-padding;
+    margin: calc(79px - $portfolio-top-padding) 0 0 0;
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
@@ -49,5 +49,11 @@
     &:hover {
       opacity: .7;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    @include content-box-header;
   }
 }

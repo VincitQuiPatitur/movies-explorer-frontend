@@ -13,10 +13,10 @@
     gap: 30px;
   }
 
-
   &__profile {
     @include flexible-center;
     gap: 17px;
+    flex-basis: 100px;
 
     &-button {
       text-decoration: none;
@@ -53,5 +53,66 @@
     width: 26px;
     height: 30px;
     @include flexible-center;
+  }
+
+  &__menu-burger {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    @include content-box-header;
+
+    &__profile {
+      display: none;
+    }
+
+    &__menu-burger {
+      z-index: 5;
+      display: block;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+      position: relative;
+
+      & &-span, &::before, &::after {
+        position: absolute;
+        left: 0;
+        height: 3px;
+        width: 28px;
+        transition: all 0.3s ease 0s;
+        background-color: $text-color;
+      }
+
+      &::before {
+        content: "";
+        top: 0;
+      }
+
+      &::after {
+        content: "";
+        bottom: 0;
+      }
+
+      & &-span {
+        top: 50%;
+        transform: scale(1) translate(0px, -50%);
+      }
+
+      &_active &-span{
+        transform: scale(0) translate(0px, -50%);
+      }
+
+      &_active::before {
+        top: 50%;
+        transform: rotate(-45deg) translate(0px, -50%);
+      }
+
+      &_active::after {
+        bottom: 50%;
+        transform: rotate(45deg) translate(0px, 50%);
+      }
+    }
   }
 }

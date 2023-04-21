@@ -2,7 +2,7 @@
 
 .search {
   width: 100%;
-  min-height: 247px;
+  min-height: 236px;
   padding: 60px 0 69px;
   box-sizing: border-box;
   border-bottom: 1px solid $line-color;
@@ -20,6 +20,9 @@
       color: $dark-text-color;
       padding: 14px 108px 14px 22px;
       box-sizing: border-box;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 17px;
     }
 
     &-button {
@@ -98,5 +101,12 @@
       font-size: 14px;
       line-height: 18px;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .search {
+    min-height: 237px;
+    padding: 80px 0 50px;
   }
 }

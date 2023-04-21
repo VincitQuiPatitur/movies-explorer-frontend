@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 function Logo() {
     return (
-        <Link to='/'>
+        <Link className="logo__link" to='/'>
             <img src={headerLogo} alt="Логотип в виде зеленого круга с белой фигуркой" className="logo" />
         </Link>
     );

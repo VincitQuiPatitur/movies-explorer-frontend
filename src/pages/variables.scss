@@ -19,6 +19,8 @@ $blue-button: #4285F4;
 $red-color: #EE3465;
 
 $header-height: 74px;
+$portfolio-top-padding: 20px;
+$portfolio-bottom-padding: 19px;
 
 @mixin flexible-center {
   display: flex;
@@ -30,5 +32,21 @@ $header-height: 74px;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 70px;
+  box-sizing: border-box;
+}
+
+@mixin content-box-tablet {
+  max-width: 768px;
+  margin: 0 auto;
+  padding-left: 50px;
+  padding-right: 50px;
+  box-sizing: border-box;
+}
+
+@mixin content-box-header {
+  max-width: 768px;
+  margin: 0 auto;
+  padding-left: 30px;
+  padding-right: 30px;
   box-sizing: border-box;
 }

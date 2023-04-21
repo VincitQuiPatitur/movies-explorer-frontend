@@ -9,11 +9,13 @@
   &__title {
     margin: 0;
     width: 100%;
+    height: 51px;
     font-weight: 400;
     font-size: 22px;
     line-height: 27px;
     letter-spacing: -0.04em;
     padding-bottom: 23px;
+    box-sizing: border-box;
     border-bottom: 1px solid $light-line-color;
   }
 
@@ -53,12 +55,14 @@
     }
 
     &-week {
+      height: 36px;
       font-weight: 400;
       font-size: 14px;
       line-height: 17px;
       text-align: center;
       margin: 0;
       padding: 9px 0;
+      box-sizing: border-box;
 
       &-backend {
         background-color: $green-button;
@@ -79,5 +83,27 @@
       margin: 14px 0 0;
     }
   }
+}
 
+@media (max-width: 768px) {
+  .about {
+    @include content-box-tablet;
+    padding-top: 90px;
+    padding-bottom: 90px;
+    min-height: 585px;
+
+    &__information {
+      padding-bottom: 90px;
+      gap: 30px;
+    }
+
+    &__article {
+
+      &-text {
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 22px;
+      }
+    }
+  }
 }

@@ -4,16 +4,25 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
-import React from "react";
+import React, {useState} from "react";
 import Register from "../Register/Register";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
+    const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
+
+    function toggleBurgerMenuClick() {
+        setBurgerMenuOpen(!isBurgerMenuOpen);
+    }
+
     return (
         <div className="app">
-            <Header/>
+            <Header
+                onClick={toggleBurgerMenuClick}
+                isActive={isBurgerMenuOpen}
+            />
             <Routes>
                 <Route
                     path='/'

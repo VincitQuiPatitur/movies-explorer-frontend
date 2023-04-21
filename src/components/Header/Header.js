@@ -4,7 +4,7 @@ import {Link, useLocation} from "react-router-dom";
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header(props) {
     const location = useLocation();
 
     return (
@@ -27,7 +27,11 @@ function Header() {
                     {/* Переделать на props.LoggedIn */}
                     {(location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile') &&
                         <>
-                            <Navigation />
+                            <div onClick={props.onClick} id='burger_button'
+                                className={`header__menu-burger ${props.isActive ? `header__menu-burger_active` : ``}`}>
+                                <span className="header__menu-burger-span"></span>
+                            </div>
+                            <Navigation/>
                             <div className="header__profile">
                                 <Link className="header__profile-button" to='/profile'>Аккаунт</Link>
                                 <div className="header__logo-block">

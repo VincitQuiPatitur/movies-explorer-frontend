@@ -70,3 +70,39 @@
     border-radius: 10px;
   }
 }
+
+@media (max-width: 768px) {
+  .student {
+    @include content-box-tablet;
+    padding-top: 90px;
+    padding-bottom: 90px;
+    min-height: 604px;
+
+    &__block {
+      gap: 49px;
+    }
+
+    &__info {
+
+      &-name {
+        font-size: 40px;
+        line-height: 40px;
+      }
+
+      &-job {
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      &-biography {
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+
+    &__photo {
+      width: 255px;
+      height: 307px;
+    }
+  }
+}

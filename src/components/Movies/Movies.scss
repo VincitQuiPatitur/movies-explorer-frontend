@@ -3,3 +3,9 @@
 .movies {
   @include content-box;
 }
+
+@media (max-width: 1024px) {
+  .movies {
+    @include content-box-header;
+  }
+}
