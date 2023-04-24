@@ -15,12 +15,13 @@
     height: 100%;
     position: fixed;
     top: 0;
-    right: 0;
-    transition-duration: .3s;
+    right: -100%;
+    transition: background-color ease-in .3s;
+
 
     &_active {
+      right: 0;
       background-color: rgba(0, 0, 0, 0.3);
-      transition-duration: .3s;
 
       & .navtab__content {
         right: 0;
@@ -46,7 +47,7 @@
               display: block;
             }
 
-            &:hover {
+            &_active {
               border-bottom: 2px solid $text-color;
             }
           }

@@ -4,11 +4,10 @@
   width: 100%;
   min-height: 648px;
   background-color: $banner-background;
-  margin-top: -$header-height;
 
   &__container {
     @include content-box;
-    padding-top: calc(75px + $header-height);
+    padding-top: 75px;
     padding-bottom: 75px;
     display: flex;
     justify-content: space-between;

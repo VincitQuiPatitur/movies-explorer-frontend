@@ -9,3 +9,9 @@
     @include content-box-header;
   }
 }
+
+@media (max-width: 768px) {
+  .movies {
+    padding-top: $header-height;
+  }
+}

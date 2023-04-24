@@ -11,7 +11,7 @@ function Header(props) {
     return (
         <>
             {(location.pathname === '/' || location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile') ?
-                <header className="header">
+                <header className={`header${location.pathname === '/' ? ` header_promo` : ``}`}>
                     <Logo/>
                     {location.pathname === '/' &&
                         <div className="header__menu">

@@ -37,11 +37,21 @@
   &__menu-burger {
     display: none;
   }
+
+  &_promo {
+    background-color: $banner-background;
+  }
 }
 
 @media (max-width: 768px) {
   .header {
     @include content-box-header;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: $background-color;
+    border-bottom: 1px solid $timeline-background;
 
     &__menu-burger {
       z-index: 5;
@@ -78,6 +88,11 @@
         transform: scale(1) translate(0px, -50%);
       }
 
+      &_active {
+        width: 22px;
+        height: 22px;
+      }
+
       &_active &-span {
         transform: scale(0) translate(0px, -50%);
       }
@@ -91,6 +106,10 @@
         bottom: 50%;
         transform: rotate(45deg) translate(0px, 50%);
       }
+    }
+
+    &_promo {
+      background-color: $banner-background;
     }
   }
 }

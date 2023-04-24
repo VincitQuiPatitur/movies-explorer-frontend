@@ -12,17 +12,22 @@
     position: relative;
 
     &-input {
+      outline: 0;
       width: 100%;
       height: 46px;
       background-color: $input-background;
       border-radius: 40px;
       border: none;
-      color: $dark-text-color;
+      color: $text-color;
       padding: 14px 108px 14px 22px;
       box-sizing: border-box;
       font-weight: 400;
       font-size: 13px;
       line-height: 17px;
+
+      &::placeholder {
+        color: $dark-text-color;
+      }
     }
 
     &-button {

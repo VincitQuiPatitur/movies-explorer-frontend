@@ -88,3 +88,9 @@
     text-decoration: none;
   }
 }
+
+@media (max-width: 768px) {
+  .profile {
+    padding-top: calc(236px + $header-height);
+  }
+}
