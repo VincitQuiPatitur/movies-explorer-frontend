@@ -10,6 +10,11 @@ function Navigation() {
         <nav className='navigation'>
             <ul className="navigation__navbar">
                 <li className={`navigation__navbar-link ${moviesActive}`}>
+                    <Link className="navigation__navbar-link-item" to='/'>
+                        Главная
+                    </Link>
+                </li>
+                <li className={`navigation__navbar-link ${moviesActive}`}>
                     <Link className="navigation__navbar-link-item" to='/movies'>
                         Фильмы
                     </Link>

@@ -6,25 +6,12 @@
   justify-content: space-between;
   align-items: center;
   min-height: $header-height;
-  z-index: 3;
+  z-index: 5;
+  position: relative;
 
   &__menu {
     @include flexible-center;
     gap: 30px;
-  }
-
-  &__profile {
-    @include flexible-center;
-    gap: 17px;
-    flex-basis: 100px;
-
-    &-button {
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 16px;
-      color: $text-color;
-    }
   }
 
   &__signup {
@@ -47,14 +34,6 @@
     text-decoration: none;
   }
 
-  &__logo-block {
-    background-color: $inactive-icon;
-    border-radius: 4px;
-    width: 26px;
-    height: 30px;
-    @include flexible-center;
-  }
-
   &__menu-burger {
     display: none;
   }
@@ -64,17 +43,15 @@
   .header {
     @include content-box-header;
 
-    &__profile {
-      display: none;
-    }
-
     &__menu-burger {
       z-index: 5;
       display: block;
       width: 28px;
       height: 20px;
       cursor: pointer;
-      position: relative;
+      position: fixed;
+      top: 26px;
+      right: 30px;
 
       & &-span, &::before, &::after {
         position: absolute;
@@ -83,6 +60,7 @@
         width: 28px;
         transition: all 0.3s ease 0s;
         background-color: $text-color;
+        z-index: 5;
       }
 
       &::before {

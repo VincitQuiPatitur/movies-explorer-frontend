@@ -1,0 +1,30 @@
+@import "../../pages/variables.scss";
+
+.profile-button {
+  @include flexible-center;
+  gap: 17px;
+  flex-basis: 100px;
+
+    &__link {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      color: $text-color;
+    }
+
+  &__logo-block {
+    background-color: $inactive-icon;
+    border-radius: 4px;
+    width: 26px;
+    height: 30px;
+    @include flexible-center;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-button {
+    display: none;
+  }
+
+}
