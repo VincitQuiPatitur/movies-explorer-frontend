@@ -29,14 +29,14 @@ function Header(props) {
                             <div onClick={props.onClick} id='burger_button'
                                  className={`header__menu-burger ${props.isActive ? `header__menu-burger_active` : ``}`}>
                                 <span className="header__menu-burger-span"></span>
-                                <NavTab
-                                isActive={props.isActive}
-                                />
                             </div>
                             <Navigation/>
                             <ProfileButton/>
                         </>
                     }
+                    <NavTab
+                        isActive={props.isActive}
+                    />
                 </header>
                 : null
             }
