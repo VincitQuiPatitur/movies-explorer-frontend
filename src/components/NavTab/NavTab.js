@@ -5,7 +5,7 @@ import React from "react";
 
 function NavTab(props) {
     return (
-        <div id='navtab' className={`navtab${props.isActive ? `_active` : ``}`}>
+        <div id='navtab' className={`navtab ${props.isActive ? `navtab_active` : ``}`}>
             <nav className="navtab__content">
                 <Navigation/>
                 <ProfileButton />
