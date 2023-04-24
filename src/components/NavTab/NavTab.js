@@ -7,8 +7,12 @@ function NavTab(props) {
     return (
         <div id='navtab' className={`navtab ${props.isActive ? `navtab_active` : ``}`}>
             <nav className="navtab__content">
-                <Navigation/>
-                <ProfileButton />
+                <Navigation
+                    closeNavTab={props.closeNavTab}
+                />
+                <ProfileButton
+                    closeNavTab={props.closeNavTab}
+                />
             </nav>
         </div>
     );

@@ -17,11 +17,16 @@ function App() {
         setBurgerMenuOpen(!isBurgerMenuOpen);
     }
 
+    function closeElement() {
+        setBurgerMenuOpen(false);
+    }
+
     return (
         <div className="app">
             <Header
                 onClick={toggleBurgerMenuClick}
                 isActive={isBurgerMenuOpen}
+                onClose={closeElement}
             />
             <Routes>
                 <Route

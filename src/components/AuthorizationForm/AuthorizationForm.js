@@ -28,7 +28,8 @@ function AuthorizationForm(props) {
                 </fieldset>
                 <button type="submit" className="authorization__form-button">{props.buttonText}</button>
             </form>
-            <p className="authorization__link">{props.text} <Link className="authorization__link-text" to={props.link}>{props.linkText}</Link></p>
+            <p className="authorization__link">{props.text} <Link className="authorization__link-text"
+                                                                  to={props.link}>{props.linkText}</Link></p>
         </>
     );
 }

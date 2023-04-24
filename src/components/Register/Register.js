@@ -5,7 +5,7 @@ import Logo from "../Logo/Logo";
 function Register() {
     return (
         <div className="login">
-            <Logo />
+            <Logo/>
             <AuthorizationForm
                 title={'Добро пожаловать!'}
                 buttonText={'Зарегистрироваться'}

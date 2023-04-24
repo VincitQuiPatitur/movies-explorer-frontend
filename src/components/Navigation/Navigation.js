@@ -1,7 +1,7 @@
 import {Link, useLocation} from "react-router-dom";
 import React from "react";
 
-function Navigation() {
+function Navigation(props) {
     const location = useLocation();
     const moviesActive = (location.pathname === '/movies' ? 'navigation__navbar-link_active' : "");
     const savedMoviesActive = (location.pathname === '/saved-movies' ? 'navigation__navbar-link_active' : "");
@@ -10,17 +10,26 @@ function Navigation() {
         <nav className='navigation'>
             <ul className="navigation__navbar">
                 <li className={`navigation__navbar-link ${moviesActive}`}>
-                    <Link className="navigation__navbar-link-item" to='/'>
+                    <Link
+                        className="navigation__navbar-link-item"
+                        to='/'
+                        onClick={props.closeNavTab}>
                         Главная
                     </Link>
                 </li>
                 <li className={`navigation__navbar-link ${moviesActive}`}>
-                    <Link className="navigation__navbar-link-item" to='/movies'>
+                    <Link
+                        className="navigation__navbar-link-item"
+                        to='/movies'
+                        onClick={props.closeNavTab}>
                         Фильмы
                     </Link>
                 </li>
                 <li className={`navigation__navbar-link ${savedMoviesActive}`}>
-                    <Link className="navigation__navbar-link-item" to='/saved-movies'>
+                    <Link
+                        className="navigation__navbar-link-item"
+                        to='/saved-movies'
+                        onClick={props.closeNavTab}>
                         Сохранённые фильмы
                     </Link>
                 </li>

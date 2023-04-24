@@ -5,13 +5,13 @@
   gap: 17px;
   flex-basis: 100px;
 
-    &__link {
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 16px;
-      color: $text-color;
-    }
+  &__link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: $text-color;
+  }
 
   &__logo-block {
     background-color: $inactive-icon;
