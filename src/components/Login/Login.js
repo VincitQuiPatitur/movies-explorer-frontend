@@ -1,10 +1,11 @@
 import React from "react";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import Logo from "../Logo/Logo";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
-function Login() {
+function Login(props) {
     return (
-        <div className="login">
+        <><div className="login">
             <Logo/>
             <AuthorizationForm
                 title={'Рады видеть!'}
@@ -14,6 +15,11 @@ function Login() {
                 linkText={"Регистрация"}
             />
         </div>
+            <InfoTooltip
+                isOpen={props.isOpen}
+                onClose={props.onClose}
+            />
+        </>
     );
 }
 

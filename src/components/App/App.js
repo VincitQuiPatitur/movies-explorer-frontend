@@ -12,6 +12,7 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
     const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
+    const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(true);
 
     function toggleBurgerMenuClick() {
         setBurgerMenuOpen(!isBurgerMenuOpen);
@@ -19,6 +20,7 @@ function App() {
 
     function closeElement() {
         setBurgerMenuOpen(false);
+        setInfoTooltipOpen(false);
     }
 
     return (
@@ -44,10 +46,16 @@ function App() {
                     element={<Profile/>}/>
                 <Route
                     path='/signin'
-                    element={<Login/>}/>
+                    element={<Login
+                        isOpen={isInfoTooltipOpen}
+                        onClose={closeElement}
+                    />}/>
                 <Route
                     path='/signup'
-                    element={<Register/>}/>
+                    element={<Register
+                        isOpen={isInfoTooltipOpen}
+                        onClose={closeElement}
+                    />}/>
                 <Route
                     path='/*'
                     element={<NotFoundPage/>}/>

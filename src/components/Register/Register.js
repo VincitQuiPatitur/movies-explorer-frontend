@@ -1,19 +1,26 @@
 import React from "react";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import Logo from "../Logo/Logo";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
-function Register() {
+function Register(props) {
     return (
-        <div className="login">
-            <Logo/>
-            <AuthorizationForm
-                title={'Добро пожаловать!'}
-                buttonText={'Зарегистрироваться'}
-                text={'Уже зарегистрированы?'}
-                link={"/signin"}
-                linkText={"Войти"}
+        <>
+            <div className="login">
+                <Logo/>
+                <AuthorizationForm
+                    title={'Добро пожаловать!'}
+                    buttonText={'Зарегистрироваться'}
+                    text={'Уже зарегистрированы?'}
+                    link={"/signin"}
+                    linkText={"Войти"}
+                />
+            </div>
+            <InfoTooltip
+                isOpen={props.isOpen}
+                onClose={props.onClose}
             />
-        </div>
+        </>
     );
 }
 
