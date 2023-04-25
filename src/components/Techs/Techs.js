@@ -1,10 +1,11 @@
 import React from "react";
+import Title from "../Title/Title";
 
 function Techs() {
     return (
         <section className='technologies'>
             <div className="technologies__container">
-                <h2 className="about__title">Технологии</h2>
+                <Title titleName={'Технологии'}/>
                 <div className="technologies__information">
                     <h3 className="technologies__information-title">7&nbsp;технологий</h3>
                     <p className="technologies__information-text">На&nbsp;курсе веб-разработки мы&nbsp;освоили

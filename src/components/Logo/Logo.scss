@@ -1,14 +1,14 @@
-.logo__link {
-  flex-basis: 100px;
-}
-
 .logo {
-  width: 38px;
-  height: 38px;
+  flex-basis: 100px;
+
+  &__image {
+    width: 38px;
+    height: 38px;
+  }
 }
 
 @media (max-width: 540px) {
-  .logo__link {
+  .logo {
     flex-basis: 0;
     align-self: center;
   }

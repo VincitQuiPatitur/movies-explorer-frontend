@@ -6,7 +6,7 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 function Register(props) {
     return (
         <>
-            <div className="login">
+            <div className="authorization">
                 <Logo/>
                 <AuthorizationForm
                     title={'Добро пожаловать!'}

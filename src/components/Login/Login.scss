@@ -1,22 +1,15 @@
 @import "../../pages/variables.scss";
 
-.login {
-  margin: 0 auto;
-  padding: 70px 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  max-width: 396px;
-}
+
 
 @media (max-width: 768px) {
-  .login {
+  .authorization {
     padding-top: 232px;
   }
 }
 
 @media (max-width: 540px) {
-  .login {
+  .authorization {
     padding: 56px 30px 30px;
   }
 }
