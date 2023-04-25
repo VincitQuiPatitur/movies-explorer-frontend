@@ -39,8 +39,13 @@
     box-sizing: border-box;
     cursor: pointer;
 
-    &_active {
+    &_added {
       background-color: $active-tumbler;
+    }
+
+    &_delete {
+      border: none;
+      background: url(../../images/cross-button.svg) no-repeat no-repeat center center;
     }
   }
 
