@@ -57,3 +57,34 @@
     @include content-box-header;
   }
 }
+
+@media (max-width: 540px) {
+  .footer {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &__info {
+      font-size: 12px;
+      line-height: 15px;
+      padding: 20px 0;
+    }
+
+    &__under-line {
+      flex-direction: column-reverse;
+      gap: 30px;
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    &__links {
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    &__copyright {
+      color: $dark-text-color;
+
+    }
+  }
+}

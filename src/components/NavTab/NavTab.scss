@@ -78,3 +78,27 @@
     }
   }
 }
+
+@media (max-width: 540px) {
+  .navtab {
+
+    &__content {
+      width: 100%;
+      padding-top: 137px;
+      padding-bottom: 48px;
+    }
+
+    & &__content {
+      & .navigation {
+        &__navbar {
+          gap: 16px;
+
+          &-link {
+            padding: 7px 0;
+            height: 36px;
+          }
+        }
+      }
+    }
+  }
+}

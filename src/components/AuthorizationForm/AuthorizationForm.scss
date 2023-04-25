@@ -17,6 +17,7 @@
   &-fieldset {
     border: 0;
     margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
   }
@@ -79,5 +80,26 @@
   &-text {
     color: $blue-button;
     text-decoration: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .authorization__title {
+    margin: 50px auto 80px auto;
+  }
+
+  .authorization__form {
+    height: 460px;
+
+    &-button {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+
+  .authorization__link {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 14px;
   }
 }

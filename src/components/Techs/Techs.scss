@@ -90,3 +90,39 @@
     }
   }
 }
+
+@media (max-width: 540px) {
+  .technologies {
+    &__container {
+      padding: 70px 18px;
+    }
+
+    &__information {
+      padding: 60px 0 50px;
+      gap: 24px;
+
+      &-title {
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: -0.04em;
+      }
+
+      &-text {
+        font-size: 11px;
+        line-height: 16px;
+        letter-spacing: -0.04em;
+      }
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 84px);
+      gap: 10px;
+      padding: 0 20px;
+
+      &-item {
+        width: 100%;
+      }
+    }
+  }
+}

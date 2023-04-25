@@ -4,7 +4,7 @@ function Profile() {
     return (
         <form className="profile">
             {/*Подтянуть имя пользователя*/}
-            <h1 className="profile__greeting">Привет, пользователь!</h1>
+            <h1 className="profile__greeting">Привет, польель!</h1>
             <fieldset className="profile__form">
                 <label className="profile__form-label">
                     <span className="profile__form-text">Имя</span>

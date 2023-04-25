@@ -106,3 +106,46 @@
     }
   }
 }
+
+@media (max-width: 540px) {
+  .student {
+    padding: 70px 14px;
+
+    &__block {
+      flex-direction: column-reverse;
+      padding-top: 60px;
+      gap: 40px;
+    }
+
+    &__photo {
+      width: 292px;
+      height: 352px;
+      align-self: center;
+    }
+
+    &__text-container {
+      gap: 40px;
+    }
+
+    &__info {
+      gap: 20px;
+
+      &-name {
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: -0.04em;
+      }
+
+      &-job {
+        font-size: 11px;
+        line-height: 16px;
+      }
+
+      &-biography {
+        padding-top: 0;
+        font-size: 11px;
+        line-height: 16px;
+      }
+    }
+  }
+}

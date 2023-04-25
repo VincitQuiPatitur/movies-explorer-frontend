@@ -63,3 +63,14 @@
     }
   }
 }
+
+@media (max-width: 540px) {
+  .movie {
+    width: 300px;
+    height: 235px;
+
+    &__image {
+      height: 168px;
+    }
+  }
+}

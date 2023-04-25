@@ -28,3 +28,9 @@
   }
 
 }
+
+@media (max-width: 540px) and (min-width: 320px) {
+  .profile-button {
+    flex-basis: 0;
+  }
+}

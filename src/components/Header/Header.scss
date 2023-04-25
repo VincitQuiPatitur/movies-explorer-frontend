@@ -1,32 +1,33 @@
 @import "../../pages/variables.scss";
 
 .header {
-  @include content-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
   min-height: $header-height;
-  z-index: 5;
-  position: relative;
+
+  &__container {
+    min-height: $header-height;
+    @include content-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
 
   &__menu {
     @include flexible-center;
     gap: 30px;
-  }
-
-  &__signup {
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
+  }
+
+  &__signup {
     color: $text-color;
     text-decoration: none;
   }
 
   &__signin {
     padding: 8px 20px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
     box-sizing: border-box;
     background-color: $green-button;
     color: $black-text;
@@ -45,13 +46,17 @@
 
 @media (max-width: 768px) {
   .header {
-    @include content-box-header;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: $background-color;
-    border-bottom: 1px solid $timeline-background;
+
+    & &__container {
+      background-color: $background-color;
+      @include content-box-header;
+      position: fixed;
+      z-index: 5;
+      width: 100%;
+      top: 0;
+      left: 0;
+      border-bottom: 1px solid $timeline-background;
+    }
 
     &__menu-burger {
       z-index: 5;
@@ -108,8 +113,35 @@
       }
     }
 
-    &_promo {
+    &_promo &__container{
       background-color: $banner-background;
+      border-bottom: none;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .header {
+
+    & &__container {
+      padding-left: 14px;
+      padding-right: 14px;
+      box-sizing: border-box;
+      min-width: 320px;
+    }
+
+    &__menu-burger {
+      right: 14px;
+    }
+
+    &__menu {
+      font-size: 10px;
+      line-height: 16px;
+      gap: 14px;
+    }
+
+    &__signin {
+      padding: 5px 12px;
     }
   }
 }

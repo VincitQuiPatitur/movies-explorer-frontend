@@ -15,3 +15,9 @@
     padding-top: $header-height;
   }
 }
+
+@media (max-width: 540px) {
+  .movies {
+    padding: $header-height 0 0;
+  }
+}

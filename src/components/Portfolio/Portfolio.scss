@@ -65,3 +65,25 @@
     }
   }
 }
+
+@media (max-width: 540px) {
+  .portfolio {
+    padding: 0 14px;
+    min-height: 294px;
+
+    &__title {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    &__links {
+      padding: 20px 0 51px;
+    }
+
+    &__link {
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: -0.04em;
+    }
+  }
+}
