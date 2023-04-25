@@ -44,7 +44,7 @@
     }
 
     &-input {
-      outline: 0;
+      outline: none;
       background-color: $background-color;
       border: none;
       border-bottom: 1px solid $line-color;
@@ -53,6 +53,10 @@
       font-size: 14px;
       line-height: 17px;
       color: $text-color;
+
+      &:focus {
+        border-bottom: 1px solid $text-color;
+      }
     }
 
     &-error {

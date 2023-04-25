@@ -10,19 +10,18 @@ function AuthorizationForm(props) {
                     {location.pathname === '/signup' &&
                         <label className="authorization__form-label">
                             <span className="authorization__form-text">Имя</span>
-                            <input
-                                type="text" className="authorization__form-input"/>
+                            <input type="text" required className="authorization__form-input"/>
                             <span className="authorization__form-error"></span>
                         </label>
                     }
                     <label className="authorization__form-label">
                         <span className="authorization__form-text">E-mail</span>
-                        <input type="email" className="authorization__form-input"/>
+                        <input type="email" required className="authorization__form-input"/>
                         <span className="authorization__form-error"></span>
                     </label>
                     <label className="authorization__form-label">
                         <span className="authorization__form-text">Пароль</span>
-                        <input type="password" className="authorization__form-input"/>
+                        <input type="password" required className="authorization__form-input"/>
                         <span className="authorization__form-error">Что-то пошло не так...</span>
                     </label>
                 </fieldset>

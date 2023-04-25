@@ -29,6 +29,11 @@
       line-height: 15px;
       color: $text-color;
       cursor: pointer;
+      transition: background-color ease-in-out .2s;
+
+      &:hover {
+        background-color: $block-background;
+      }
     }
 
     &-span {

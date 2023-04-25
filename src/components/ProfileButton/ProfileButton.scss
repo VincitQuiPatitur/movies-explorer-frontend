@@ -11,6 +11,11 @@
     font-size: 14px;
     line-height: 16px;
     color: $text-color;
+    transition: opacity ease-in-out .2s;
+
+    &:hover {
+      opacity: .6;
+    }
   }
 
   &__logo-block {

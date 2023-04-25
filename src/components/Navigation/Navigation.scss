@@ -21,6 +21,11 @@
       &-item {
         color: $text-color;
         text-decoration: none;
+        transition: opacity ease-in-out .2s;
+
+        &:hover {
+          opacity: .6;
+        }
       }
 
       &_active {

@@ -42,8 +42,8 @@
     }
 
     &-input {
+      outline: none;
       box-sizing: border-box;
-      outline: 0;
       border: 0;
       padding: 0;
       background-color: $background-color;
@@ -53,6 +53,10 @@
       line-height: 13px;
       color: $text-color;
       text-align: right;
+
+      &:focus {
+        border-bottom: 1px solid $text-color;
+      }
     }
 
     &-error {
@@ -80,6 +84,11 @@
     color: $text-color;
     cursor: pointer;
     margin-bottom: 16px;
+    transition: opacity ease-in-out .2s;
+
+    &:hover {
+      opacity: .6;
+    }
   }
 
   &__signout-button {
@@ -88,6 +97,11 @@
     line-height: 16px;
     color: $red-color;
     text-decoration: none;
+    transition: opacity ease-in-out .2s;
+
+    &:hover {
+      opacity: .6;
+    }
   }
 }
 
