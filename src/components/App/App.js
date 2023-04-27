@@ -1,10 +1,11 @@
+import React, {useState} from "react";
 import {Routes, Route} from "react-router-dom";
+import moviesApi from "../../utils/MoviesApi.js.";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
-import React, {useState} from "react";
 import Register from "../Register/Register";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -13,6 +14,14 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 function App() {
     const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
     const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(true);
+
+    React.useEffect(() => {
+       moviesApi.getInitialMovies()
+           .then(movies => {
+               localStorage.setItem('movies', JSON.stringify(movies))
+           })
+           .catch(error => console.log(error));
+    }, []);
 
     function toggleBurgerMenuClick() {
         setBurgerMenuOpen(!isBurgerMenuOpen);
