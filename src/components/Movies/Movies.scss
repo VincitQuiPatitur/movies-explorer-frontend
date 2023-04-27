@@ -1,0 +1,23 @@
+@import "../../pages/variables.scss";
+
+.movies {
+  @include content-box;
+}
+
+@media (max-width: 1024px) {
+  .movies {
+    @include content-box-header;
+  }
+}
+
+@media (max-width: 768px) {
+  .movies {
+    padding-top: $header-height;
+  }
+}
+
+@media (max-width: 540px) {
+  .movies {
+    padding: $header-height 0 0;
+  }
+}

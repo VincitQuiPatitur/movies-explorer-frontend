@@ -1,0 +1,42 @@
+@import "../../pages/variables.scss";
+
+.navigation {
+
+  &__navbar {
+    @include flexible-center;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &-link {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 18px;
+
+      &:first-child {
+        display: none;
+      }
+
+      &-item {
+        color: $text-color;
+        text-decoration: none;
+        transition: opacity ease-in-out .2s;
+
+        &:hover {
+          opacity: .6;
+        }
+      }
+
+      &_active {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    display: none;
+  }
+}

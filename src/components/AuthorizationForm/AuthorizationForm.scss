@@ -1,0 +1,141 @@
+@import "../../pages/variables.scss";
+
+.authorization {
+  margin: 0 auto;
+  padding: 70px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: 396px;
+  height: 100vh;
+
+  & .logo {
+    flex-basis: 0;
+  }
+
+  &__title {
+    margin: 40px 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  &__form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-label {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-text {
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      color: $dark-text-color;
+      margin-bottom: 5px;
+    }
+
+    &-input {
+      outline: none;
+      background-color: $background-color;
+      border: none;
+      border-bottom: 1px solid $line-color;
+      padding: 0 0 10px 0;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $text-color;
+
+      &:focus {
+        border-bottom: 1px solid $text-color;
+      }
+    }
+
+    &-error {
+      color: $red-color;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      height: 12px;
+      padding: 6px 0;
+    }
+
+    &-button {
+      margin-top: 64px;
+      background-color: $blue-button;
+      border-radius: 3px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      padding: 13px 0 15px;
+      color: $text-color;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  &__link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 16px 0 0;
+    color: $dark-text-color;
+
+    &-text {
+      color: $blue-button;
+      text-decoration: none;
+    }
+  }
+
+}
+
+@media (max-width: 768px) {
+  .authorization {
+    padding: 232px 0;
+
+    &__form-button {
+      margin-top: 69px;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+
+  .authorization {
+    padding: 56px 0 30px;
+
+    &__title {
+      margin: 50px auto 80px auto;
+    }
+
+    &__form {
+      padding: 0 30px;
+      box-sizing: border-box;
+
+      &-button {
+        font-size: 12px;
+        line-height: 15px;
+      }
+    }
+
+    &__link {
+      font-size: 12px;
+      line-height: 15px;
+      margin-top: 14px;
+    }
+  }
+}

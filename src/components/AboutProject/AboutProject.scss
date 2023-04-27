@@ -1,0 +1,150 @@
+@import "../../pages/variables.scss";
+
+.about {
+  min-height: 608px;
+  @include content-box;
+  padding-top: 110px;
+  padding-bottom: 110px;
+
+  &__information {
+    @include flexible-center;
+    gap: 40px;
+    padding: 70px 0 110px;
+  }
+
+  &__article {
+
+    &-title {
+      margin: 0;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: -0.04em;
+    }
+
+    &-text {
+      margin: 26px 0 0;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  &__timeline {
+    @include flexible-center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    &-block:first-child {
+      width: 20%;
+    }
+
+    &-block:last-child {
+      width: 80%;
+    }
+
+    &-week {
+      height: 36px;
+      text-align: center;
+      margin: 0;
+      padding: 9px 0;
+      box-sizing: border-box;
+
+      &-backend {
+        background-color: $green-button;
+        color: $black-text;
+      }
+
+      &-frontend {
+        background-color: $timeline-background;
+      }
+    }
+
+    &-part {
+      font-weight: 500;
+      text-align: center;
+      color: $dark-text-color;
+      margin: 14px 0 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    @include content-box-tablet;
+    padding-top: 90px;
+    padding-bottom: 90px;
+    min-height: 585px;
+
+    &__information {
+      padding-bottom: 90px;
+      gap: 30px;
+    }
+
+    &__article {
+
+      &-text {
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .about {
+    padding: 70px 18px;
+
+    &__title {
+      font-size: 18px;
+      line-height: 22px;
+      letter-spacing: -0.04em;
+      padding-bottom: 28px;
+    }
+
+    &__information {
+      padding: 60px 0;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    &__article {
+
+      &-title {
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: -0.04em;
+      }
+
+      &-text {
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 16px;
+      }
+    }
+
+    &__timeline {
+      font-size: 11px;
+      line-height: 13px;
+
+      &-week {
+        height: 35px;
+        padding: 11px 0;
+      }
+
+      &-block:first-child {
+        min-width: 100px;
+      }
+
+      &-block:last-child {
+        min-width: 184px;
+      }
+
+      &-part {
+        margin-top: 10px;
+      }
+    }
+  }
+}

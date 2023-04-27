@@ -1,0 +1,89 @@
+@import "../../pages/variables.scss";
+
+.portfolio {
+  @include content-box;
+  min-height: 425px;
+
+  &__title {
+    margin: 0;
+    color: $dark-text-color;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  &__links {
+    padding: calc(50px - $portfolio-top-padding) 0 calc(125px - $portfolio-bottom-padding);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+  }
+
+  &__link {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.04em;
+    border-bottom: 1px solid $line-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &-item {
+      text-decoration: none;
+      color: $text-color;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $portfolio-top-padding 0 $portfolio-bottom-padding;
+      transition: opacity .3s ease-in-out;
+
+      &:hover {
+        opacity: .6;
+      }
+    }
+
+    &-text {
+      margin: 0;
+    }
+
+    &-arrow {
+
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio {
+    @include content-box-tablet;
+    min-height: 390px;
+
+    &__links {
+      padding-bottom: calc(90px - $portfolio-bottom-padding);
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .portfolio {
+    padding: 0 14px;
+    min-height: 294px;
+
+    &__title {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    &__links {
+      padding: 20px 0 51px;
+    }
+
+    &__link {
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: -0.04em;
+    }
+  }
+}

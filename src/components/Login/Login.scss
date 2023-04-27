@@ -1,0 +1,15 @@
+@import "../../pages/variables.scss";
+
+
+
+@media (max-width: 768px) {
+  .authorization {
+    padding-top: 232px;
+  }
+}
+
+@media (max-width: 540px) {
+  .authorization {
+    padding: 56px 30px 30px;
+  }
+}

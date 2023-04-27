@@ -1,0 +1,37 @@
+@import "../vendor/normalize.css";
+@import "../vendor/fonts/inter.css";
+
+body {
+  margin: 0;
+  background-color: #202020;
+  width: 100%;
+}
+
+@import "../components/App/App.scss";
+@import "../components/Header/Header.scss";
+@import "../components/Main/Main.scss";
+@import "../components/Movies/Movies.scss";
+@import "../components/Footer/Footer.scss";
+
+@import "../components/Promo/Promo.scss";
+@import "../components/Logo/Logo.scss";
+@import "../components/Title/Title.scss";
+@import "../components/ProfileButton/ProfileButton.scss";
+@import "../components/NavTab/NavTab.scss";
+@import "../components/AboutProject/AboutProject.scss";
+@import "../components/Techs/Techs.scss";
+@import "../components/AboutMe/AboutMe.scss";
+@import "../components/Portfolio/Portfolio.scss";
+
+@import "../components/Navigation/Navigation.scss";
+@import "../components/SearchForm/SearchForm.scss";
+@import "../components/Preloader/Preloader.scss";
+@import "../components/MoviesCardList/MoviesCardList.scss";
+@import "../components/MoviesCard/MoviesCard.scss";
+@import "../components/Profile/Profile.scss";
+@import "../components/Login/Login.scss";
+@import "../components/AuthorizationForm/AuthorizationForm.scss";
+@import "../components/NotFoundPage/NotFoundPage.scss";
+@import "../components/InfoTooltip/InfoTooltip.scss";
+
+

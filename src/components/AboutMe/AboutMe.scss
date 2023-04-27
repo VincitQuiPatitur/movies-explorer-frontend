@@ -1,0 +1,151 @@
+@import "../../pages/variables.scss";
+
+.student {
+  @include content-box;
+  padding-top: 110px;
+  padding-bottom: 100px;
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 66px;
+    gap: 20px;
+  }
+
+  &__text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    &-name {
+      margin: 0;
+      font-weight: 400;
+      font-size: 50px;
+      line-height: 58px;
+      letter-spacing: -0.04em;
+    }
+
+    &-job {
+      margin: 0;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 20px;
+    }
+
+    &-biography {
+      margin: 0;
+      max-width: 600px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      padding-top: 8px;
+    }
+  }
+
+  &__link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    justify-self: end;
+    color: $text-color;
+    text-decoration: none;
+    transition: opacity .3s ease-in-out;
+
+    &:hover {
+      opacity: .6;
+    }
+  }
+
+  &__photo {
+    width: 270px;
+    height: 327px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .student {
+    @include content-box-tablet;
+    padding-top: 90px;
+    padding-bottom: 90px;
+    min-height: 604px;
+
+    &__block {
+      gap: 49px;
+    }
+
+    &__info {
+
+      &-name {
+        font-size: 40px;
+        line-height: 40px;
+      }
+
+      &-job {
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      &-biography {
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+
+    &__photo {
+      width: 255px;
+      height: 307px;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .student {
+    padding: 70px 14px;
+
+    &__block {
+      flex-direction: column-reverse;
+      padding-top: 60px;
+      gap: 40px;
+    }
+
+    &__photo {
+      width: 292px;
+      height: 352px;
+      align-self: center;
+    }
+
+    &__text-container {
+      gap: 40px;
+    }
+
+    &__info {
+      gap: 20px;
+
+      &-name {
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: -0.04em;
+      }
+
+      &-job {
+        font-size: 11px;
+        line-height: 16px;
+      }
+
+      &-biography {
+        padding-top: 0;
+        font-size: 11px;
+        line-height: 16px;
+      }
+    }
+  }
+}

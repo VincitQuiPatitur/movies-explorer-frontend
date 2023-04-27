@@ -1,0 +1,146 @@
+@import "../../pages/variables.scss";
+
+.header {
+  width: 100%;
+  min-height: $header-height;
+
+  &__container {
+    min-height: $header-height;
+    @include content-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  &__menu {
+    @include flexible-center;
+    gap: 30px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  &__signup {
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  &__signin {
+    padding: 8px 20px;
+    box-sizing: border-box;
+    background-color: $green-button;
+    color: $black-text;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+
+  &__menu-burger {
+    display: none;
+  }
+
+  &_promo {
+    background-color: $banner-background;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+
+    & &__container {
+      background-color: $background-color;
+      @include content-box-header;
+      position: fixed;
+      z-index: 5;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    &__menu-burger {
+      z-index: 5;
+      display: block;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+      position: fixed;
+      top: 26px;
+      right: 30px;
+
+      & &-span, &::before, &::after {
+        position: absolute;
+        left: 0;
+        height: 3px;
+        width: 28px;
+        transition: all 0.3s ease 0s;
+        background-color: $text-color;
+        z-index: 5;
+      }
+
+      &::before {
+        content: "";
+        top: 0;
+      }
+
+      &::after {
+        content: "";
+        bottom: 0;
+      }
+
+      & &-span {
+        top: 50%;
+        transform: scale(1) translate(0px, -50%);
+      }
+
+      &_active {
+        width: 22px;
+        height: 22px;
+      }
+
+      &_active &-span {
+        transform: scale(0) translate(0px, -50%);
+      }
+
+      &_active::before {
+        top: 50%;
+        transform: rotate(-45deg) translate(0px, -50%);
+      }
+
+      &_active::after {
+        bottom: 50%;
+        transform: rotate(45deg) translate(0px, 50%);
+      }
+    }
+
+    &_promo &__container {
+      background-color: $banner-background;
+      border-bottom: none;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .header {
+
+    & &__container {
+      padding-left: 14px;
+      padding-right: 14px;
+      box-sizing: border-box;
+      min-width: 320px;
+    }
+
+    &__menu-burger {
+      right: 14px;
+    }
+
+    &__menu {
+      font-size: 10px;
+      line-height: 16px;
+      gap: 14px;
+    }
+
+    &__signin {
+      padding: 5px 12px;
+    }
+  }
+}

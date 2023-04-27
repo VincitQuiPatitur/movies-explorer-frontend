@@ -1,0 +1,136 @@
+@import "../../pages/variables.scss";
+
+.profile {
+  @include content-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: calc(74px - 17px);
+  padding-bottom: 70px;
+  height: calc(100vh - $header-height);
+
+  &__greeting {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: calc(123px - 16px) 0;
+    border: none;
+    margin: 0;
+    height: 100%;
+
+    &-label {
+      width: 410px;
+      border-bottom: 1px solid $line-color;
+      font-weight: 500;
+      font-size: 11px;
+      line-height: 13px;
+      display: grid;
+      grid-template-columns: 141px auto;
+      padding: 17px 0 0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    &-input {
+      outline: none;
+      box-sizing: border-box;
+      border: 0;
+      padding: 0;
+      background-color: $background-color;
+      width: 100%;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 13px;
+      color: $text-color;
+      text-align: right;
+
+      &:focus {
+        border-bottom: 1px solid $text-color;
+      }
+    }
+
+    &-error {
+      text-align: center;
+      padding-top: 2px;
+      box-sizing: border-box;
+      display: inline-grid;
+      color: $red-color;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      min-height: 16px;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 13px;
+    }
+  }
+
+  &__update-button {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    border: none;
+    background-color: $background-color;
+    padding: 0;
+    color: $text-color;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: opacity ease-in-out .2s;
+
+    &:hover {
+      opacity: .6;
+    }
+  }
+
+  &__signout-button {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $red-color;
+    text-decoration: none;
+    transition: opacity ease-in-out .2s;
+
+    &:hover {
+      opacity: .6;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile {
+    padding-top: 236px;
+  }
+}
+
+@media (max-width: 540px) {
+  .profile {
+    padding: 70px 30px 40px;
+
+    &__form {
+      padding: 80px 0;
+
+      &-label {
+        width: 230px;
+      }
+    }
+
+    &__update-button {
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    &__signout-button {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+}
