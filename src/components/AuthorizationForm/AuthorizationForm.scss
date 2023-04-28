@@ -84,6 +84,11 @@
       color: $text-color;
       border: none;
       cursor: pointer;
+
+      &_inactive {
+        background-color: $inactive-tumbler;
+        color: $dark-text-color;
+      }
     }
   }
 

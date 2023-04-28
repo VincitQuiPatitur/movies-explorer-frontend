@@ -70,7 +70,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-    baseUrl: 'https://api.movies.kostrova.nomoredomains.monster',
+    /*baseUrl: 'https://api.movies.kostrova.nomoredomains.monster',*/
+    baseUrl: 'http://localhost:3001',
     headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/json'
