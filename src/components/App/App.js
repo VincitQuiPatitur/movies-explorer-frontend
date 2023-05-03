@@ -81,6 +81,16 @@ function App() {
         setLoggedIn(false);
     }
 
+    function handleUpdateUser(userInfo) {
+        mainApi.changeUserInfo(userInfo)
+            .then(result => {
+                console.log('update');
+                console.log(result);
+                setCurrentUser(result);
+            })
+            .catch(error => console.log(error))
+    }
+
     useEffect(() => {
         const token = localStorage.getItem("jwt");
         if (token) {
@@ -132,6 +142,7 @@ function App() {
                         element={<ProtectedRoute
                             component={Profile}
                             isLoggedIn={isLoggedIn}
+                            onUserUpdate={handleUpdateUser}
                             onLogout={handleLogout}
                         />}/>
                     <Route
