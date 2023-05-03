@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
-import moviesApi from "../../utils/MoviesApi";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+// import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -15,15 +15,18 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import * as auth from '../../utils/auth.js';
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
     const [currentUser, setCurrentUser] = useState({});
-    const [isRegisterOk, setRegisterOk] = useState(false);
     const [isLoggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
+    const [popupMessage, setPopupMessage] = useState({
+        isInfoTooltipOpen: false,
+        isSuccess: false,
+        message: ''
+    });
     const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
-    const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
 
    /* useEffect(() => {
         moviesApi.getInitialMovies()
@@ -37,7 +40,6 @@ function App() {
         if (isLoggedIn) {
             mainApi.getUserInfo()
                 .then(userData => {
-                    console.log(userData);
                     setCurrentUser(userData);
                 })
                 .catch(error => console.log(error));
@@ -47,13 +49,24 @@ function App() {
     function handleRegister({name, email, password}) {
         return auth.register(name, email, password)
             .then(() => {
-                setRegisterOk(true);
-                setInfoTooltipOpen(true);
+                setPopupMessage({
+                    isInfoTooltipOpen: true,
+                    isSuccess: true,
+                    message: "Вы успешно зарегистрированы!"
+                })
                 return handleLogin({email, password});
             })
-            .catch(err => {
-                console.log(`Ошибка в процессе регистрации пользователя на сайте: ${err}`);
-                setInfoTooltipOpen(true);
+            .catch(error => {
+                setPopupMessage({
+                    isInfoTooltipOpen: true,
+                    isSuccess: false,
+                    message: error === "Ошибка: 409"
+                        ? "Пользователь с такой почтой уже зарегистрирован"
+                        : error === 'Ошибка: 400'
+                            ? "Одно или несколько полей формы неверно заполнены"
+                            : "Ой-ой! Что-то пошло не так! Попробуйте ещё раз"
+                });
+                console.log(`Ошибка в процессе регистрации пользователя на сайте: ${error}`);
             });
     }
 
@@ -64,13 +77,20 @@ function App() {
                 if (data.token) {
                     localStorage.setItem("jwt", data.token);
                     setLoggedIn(true);
-                    setCurrentUser(data.user);
-                    setInfoTooltipOpen(true);
+                    setPopupMessage({
+                        isInfoTooltipOpen: true,
+                        isSuccess: true,
+                        message: "Вы успешно авторизировались"
+                    })
                     navigate("/movies");
                 }
             })
             .catch((err) => {
-                setInfoTooltipOpen(true);
+                setPopupMessage({
+                    isInfoTooltipOpen: true,
+                    isSuccess: false,
+                    message: "Неверный логин или пароль"
+                })
                 console.log(`Ошибка в процессе авторизации пользователя на сайте: ${err}`);
             });
     }
@@ -84,11 +104,25 @@ function App() {
     function handleUpdateUser(userInfo) {
         mainApi.changeUserInfo(userInfo)
             .then(result => {
-                console.log('update');
-                console.log(result);
+                setPopupMessage({
+                    isInfoTooltipOpen: true,
+                    isSuccess: true,
+                    message: "Ваши данные успешно изменены"
+                });
                 setCurrentUser(result);
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                setPopupMessage({
+                    isInfoTooltipOpen: true,
+                    isSuccess: false,
+                    message: error === "Error: 400 Bad Request"
+                        ? "Неверный формат почты"
+                        : error === "Error: 409 Conflict"
+                            ? "Пользователь с такой почтой уже зарегистрирован"
+                            : "Что-то пошло не так, попробуйте ещё раз"
+                })
+                console.log(error);
+            })
     }
 
     useEffect(() => {
@@ -106,7 +140,7 @@ function App() {
 
     function closeElement() {
         setBurgerMenuOpen(false);
-        setInfoTooltipOpen(false);
+        setPopupMessage({...popupMessage, isInfoTooltipOpen: false});
     }
 
     return (
@@ -148,16 +182,13 @@ function App() {
                     <Route
                         path='/signin'
                         element={<Login
-                            isOpen={isInfoTooltipOpen}
                             onClose={closeElement}
                             onLogin={handleLogin}
                         />}/>
                     <Route
                         path='/signup'
                         element={<Register
-                            isOpen={isInfoTooltipOpen}
                             onClose={closeElement}
-                            isRegisterOk={isRegisterOk}
                             onRegister={handleRegister}
                         />}/>
                     <Route
@@ -166,6 +197,13 @@ function App() {
                 </Routes>
                 <Footer/>
             </div>
+
+            <InfoTooltip
+                isOpen={popupMessage.isInfoTooltipOpen}
+                isSuccess={popupMessage.isSuccess}
+                message={popupMessage.message}
+                onClose={closeElement}
+            />
         </CurrentUserContext.Provider>
     );
 }

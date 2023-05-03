@@ -1,8 +1,7 @@
 import React from "react";
-import popupImage from "../../images/information-popup-success.svg"
+import success from "../../images/information-popup-success.svg";
+import fail from "../../images/information-popup-fail.svg";
 
-/*
-Попап пока что появляется просто при переходе на страницу регистрации, сделать его открывающимся только после отправки данных формы и сделать вариативность изображения и надписии в зависимости от успеха регистрации/авторизации */
 function InfoTooltip(props) {
     return (
         <div className={`popup ${props.isOpen ? `popup_opened` : null}`}>
@@ -13,8 +12,12 @@ function InfoTooltip(props) {
                     onClick={props.onClose}
                     aria-label="Кнопка закрытия окна">
                 </button>
-                <img src={popupImage} alt="Чёрный круг с галочкой" className="popup__icon"/>
-                <p className="popup__info">Вы успешно зарегистрировались!</p>
+                <img
+                    src={props.isSuccess ? success : fail}
+                    alt={props.isSuccess ? "Белый круг с галочкой" : "Красный круг с крестиком"}
+                    className="popup__icon"
+                />
+                <p className="popup__info">{props.message}</p>
             </div>
         </div>
     );

@@ -1,7 +1,6 @@
 import React from "react";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import Logo from "../Logo/Logo";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import {useFormValidation} from "../../hooks/useFormValidation";
 
 function Register(props) {
@@ -34,11 +33,6 @@ function Register(props) {
                     isValueValid={isValueValid}
                 />
             </div>
-            <InfoTooltip
-                isOpen={props.isOpen}
-                onClose={props.onClose}
-                isRegisterOk={props.isRegisterOk}
-            />
         </>
     );
 }

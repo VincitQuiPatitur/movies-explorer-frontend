@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import Logo from "../Logo/Logo";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import {useFormValidation} from "../../hooks/useFormValidation";
 
 function Login(props) {
@@ -35,10 +34,6 @@ function Login(props) {
                     isValueValid={isValueValid}
                 />
             </div>
-            <InfoTooltip
-                isOpen={props.isOpen}
-                onClose={props.onClose}
-            />
         </>
     );
 }

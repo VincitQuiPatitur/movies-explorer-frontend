@@ -3,7 +3,7 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 function Profile(props) {
     const currentUser = useContext(CurrentUserContext);
-    const [name, setName] = useState('');
+    const [name, setName] = useState('Имя');
     const [email, setEmail] = useState('');
 
 
@@ -59,7 +59,7 @@ function Profile(props) {
                 </label>
             </fieldset>
             <button className="profile__update-button">Редактировать</button>
-            <a href="/signin" className="profile__signout-button">Выйти из аккаунта</a>
+            <a href="/" className="profile__signout-button" onClick={props.onLogout}>Выйти из аккаунта</a>
         </form>
     );
 }
