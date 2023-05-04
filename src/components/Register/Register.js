@@ -2,6 +2,7 @@ import React from "react";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import Logo from "../Logo/Logo";
 import {useFormValidation} from "../../hooks/useFormValidation";
+import Preloader from "../Preloader/Preloader";
 
 function Register(props) {
     const { handleChange, value, errors, isValueValid} = useFormValidation();
@@ -33,6 +34,7 @@ function Register(props) {
                     isValueValid={isValueValid}
                 />
             </div>
+            {props.isLoading && <Preloader/>}
         </>
     );
 }

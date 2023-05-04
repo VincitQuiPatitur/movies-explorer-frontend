@@ -89,6 +89,7 @@
       &_inactive {
         background-color: $inactive-tumbler;
         color: $dark-text-color;
+        pointer-events: none;
       }
     }
   }
