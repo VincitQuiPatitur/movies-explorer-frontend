@@ -23,9 +23,10 @@ function App() {
     const navigate = useNavigate();
     const [popupMessage, setPopupMessage] = useState({
         isInfoTooltipOpen: false,
-        isSuccess: false,
+        isSuccess: true,
         message: ''
     });
+    const [isLoading, setLoading] = useState(false);
     const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
 
    /* useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
     }, [isLoggedIn]);
 
     function handleRegister({name, email, password}) {
+        setLoading(true);
         return auth.register(name, email, password)
             .then(() => {
                 setPopupMessage({
@@ -67,10 +69,12 @@ function App() {
                             : "Ой-ой! Что-то пошло не так! Попробуйте ещё раз"
                 });
                 console.log(`Ошибка в процессе регистрации пользователя на сайте: ${error}`);
-            });
+            })
+            .finally(() => setLoading(false));
     }
 
     function handleLogin({ email, password }) {
+        setLoading(true);
         return auth
             .login(email, password)
             .then((data) => {
@@ -92,7 +96,8 @@ function App() {
                     message: "Неверный логин или пароль"
                 })
                 console.log(`Ошибка в процессе авторизации пользователя на сайте: ${err}`);
-            });
+            })
+            .finally(() => setLoading(false));
     }
 
 
@@ -101,7 +106,8 @@ function App() {
         setLoggedIn(false);
     }
 
-    function handleUpdateUser(userInfo) {
+    function handleUpdateUserInfo(userInfo) {
+        setLoading(true);
         mainApi.changeUserInfo(userInfo)
             .then(result => {
                 setPopupMessage({
@@ -123,6 +129,7 @@ function App() {
                 })
                 console.log(error);
             })
+            .finally(() => setLoading(false));
     }
 
     useEffect(() => {
@@ -164,20 +171,23 @@ function App() {
                         element={<ProtectedRoute
                             component={Movies}
                             isLoggedIn={isLoggedIn}
+                            isLoading={isLoading}
                         />}/>
                     <Route
                         path='/saved-movies'
                         element={<ProtectedRoute
                             component={SavedMovies}
                             isLoggedIn={isLoggedIn}
+                            isLoading={isLoading}
                         />}/>
                     <Route
                         path='/profile'
                         element={<ProtectedRoute
                             component={Profile}
                             isLoggedIn={isLoggedIn}
-                            onUserUpdate={handleUpdateUser}
+                            onUserUpdate={handleUpdateUserInfo}
                             onLogout={handleLogout}
+                            isLoading={isLoading}
                         />}/>
                     <Route
                         path='/signin'

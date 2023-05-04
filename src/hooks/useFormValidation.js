@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from "react";
+import {useState, useCallback} from "react";
 
 export function useFormValidation() {
     const [value, setValue] = useState({});
@@ -14,12 +14,12 @@ export function useFormValidation() {
     }
 
     // Очистка формы
-    /*const resetForm = useCallback(function (newValue = {}, newErrors = {}, newValueValid = false) {
+    const resetForm = useCallback(function (newValue = {}, newErrors = {}, newValueValid = false) {
             setValue(newValue);
             setErrors(newErrors);
             setValueValid(newValueValid);
         }, [setValue, setErrors, setValueValid]
-    );*/
+    );
 
-    return {handleChange, value, setValue, errors, setErrors, isValueValid, setValueValid}
+    return {handleChange, value, setValue, errors, setErrors, isValueValid, setValueValid, resetForm}
 }
