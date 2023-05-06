@@ -8,10 +8,11 @@ class MoviesApi {
         return result.ok ? result.json() : Promise.reject(`Error: ${result.status} ${result.statusText}`);
     }
 
-    getInitialMovies() {
+    getAllMovies() {
         return fetch(
             `${this._url}`,
             {
+                method: 'GET',
                 headers: this._headers
             })
             .then(this._getResult);

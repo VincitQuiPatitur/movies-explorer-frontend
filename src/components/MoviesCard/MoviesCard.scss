@@ -12,6 +12,7 @@
     height: 151px;
     object-fit: cover;
     display: block;
+    border-radius: 10px 10px 0 0;
   }
 
   &__description {
@@ -27,6 +28,9 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   &__favorite-button {

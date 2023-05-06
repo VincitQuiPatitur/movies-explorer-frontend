@@ -1,7 +1,7 @@
 class MainApi {
-    constructor({baseUrl, headers}) {
-        this._url = baseUrl;
-        this._headers = headers;
+    constructor({baseUrl, movieUrl}) {
+        this._baseUrl = baseUrl;
+        this._movieUrl = movieUrl;
     }
 
     _getResult(result) {
@@ -9,7 +9,7 @@ class MainApi {
     }
 
     getSavedMovies() {
-        return fetch(`${this._url}/movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -20,19 +20,31 @@ class MainApi {
     }
 
     addMovieToFavorite(movie) {
-        return fetch(`${this._url}/movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(movie)
+            body: JSON.stringify({
+                country: movie.country,
+                director: movie.director,
+                duration: movie.duration,
+                year: movie.year,
+                description: movie.description,
+                image: `${this._movieUrl}${movie.image.url}`,
+                trailerLink: movie.trailerLink,
+                thumbnail: `${this._movieUrl}${movie.image.url}`,
+                movieId: movie.id,
+                nameRU: movie.nameRU,
+                nameEN: movie.nameEN
+            })
         })
             .then(this._getResult);
     }
 
-    deleteMovie(_id) {
-        return fetch(`${this._url}/movies/${_id}`, {
+    deleteMovie(movieId) {
+        return fetch(`${this._baseUrl}/movies/${movieId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -43,7 +55,7 @@ class MainApi {
     }
 
     getUserInfo() {
-        return fetch(`${this._url}/users/me`, {
+        return fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -54,7 +66,7 @@ class MainApi {
     }
 
     changeUserInfo(data) {
-        return fetch(`${this._url}/users/me`, {
+        return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -72,10 +84,7 @@ class MainApi {
 const mainApi = new MainApi({
     /*baseUrl: 'https://api.movies.kostrova.nomoredomains.monster',*/
     baseUrl: 'http://localhost:3001',
-    headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-        'Content-Type': 'application/json'
-    }
+    movieUrl: 'https://api.nomoreparties.co/beatfilm-movies'
 })
 
 export default mainApi;

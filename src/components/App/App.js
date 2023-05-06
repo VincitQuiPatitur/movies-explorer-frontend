@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-// import moviesApi from "../../utils/MoviesApi";
-import mainApi from "../../utils/MainApi";
+import React, {useState, useEffect} from "react";
+import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -11,32 +9,53 @@ import Register from "../Register/Register";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
-import * as auth from '../../utils/auth.js';
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import moviesApi from "../../utils/MoviesApi";
+import mainApi from "../../utils/MainApi";
+import * as auth from '../../utils/auth.js';
 
 function App() {
+    const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState({});
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const navigate = useNavigate();
+    const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const [popupMessage, setPopupMessage] = useState({
         isInfoTooltipOpen: false,
         isSuccess: true,
         message: ''
     });
-    const [isLoading, setLoading] = useState(false);
-    const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
 
-   /* useEffect(() => {
-        moviesApi.getInitialMovies()
+    const [movies, setMovies] = useState([]);
+    const [savedMovies, setSavedMovies] = useState([]);
+    const [filteredMovies, setFilteredMovies] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const location = useLocation();
+
+    useEffect(() => {
+        moviesApi.getAllMovies()
             .then(movies => {
-                localStorage.setItem('movies', JSON.stringify(movies))
+                console.log(movies);
+                //localStorage.setItem('movies', JSON.stringify(movies));
+                setMovies(movies);
             })
-            .catch(error => console.log(error));
-    }, []);*/
-//
+            .catch(err => console.log(err));
+    }, []);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            mainApi.getSavedMovies()
+                .then((result) => {
+                    console.log(result);
+                    setSavedMovies(result.filter(movie => movie.owner === currentUser._id))
+                })
+                .catch(error => console.log(error));
+        }
+    }, [currentUser]);
+
     useEffect(() => {
         if (isLoggedIn) {
             mainApi.getUserInfo()
@@ -46,6 +65,14 @@ function App() {
                 .catch(error => console.log(error));
         }
     }, [isLoggedIn]);
+
+    useEffect(() => {
+        const token = localStorage.getItem("jwt");
+        if (token) {
+            setLoggedIn(true);
+            setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+        }
+    }, []);
 
     function handleRegister({name, email, password}) {
         setLoading(true);
@@ -73,7 +100,7 @@ function App() {
             .finally(() => setLoading(false));
     }
 
-    function handleLogin({ email, password }) {
+    function handleLogin({email, password}) {
         setLoading(true);
         return auth
             .login(email, password)
@@ -99,7 +126,6 @@ function App() {
             })
             .finally(() => setLoading(false));
     }
-
 
     function handleLogout() {
         localStorage.removeItem('jwt');
@@ -132,14 +158,73 @@ function App() {
             .finally(() => setLoading(false));
     }
 
-    useEffect(() => {
-        const token = localStorage.getItem("jwt");
-        if (token) {
-            setLoggedIn(true);
-            setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
-        }
-    }, []);
+    function handleAddMovieToFavorite(movie) {
+        console.log('handleAddMovieToFavorite');
+        console.log(movie)
+        mainApi.addMovieToFavorite(movie)
+            .then((newMovie) => {
+                console.log(newMovie);
+                setSavedMovies([newMovie, ...savedMovies]);
+                console.log(savedMovies);
+            })
+            .catch(error => console.log(error));
+    }
 
+    function handleDeleteMovie(movie) {
+        console.log('deletion');
+        console.log(movie);
+        mainApi.deleteMovie(movie._id)
+            .then(() => {
+                const updatedSavedMovies = savedMovies.slice();
+                const index = updatedSavedMovies.findIndex((m) => m._id === movie._id);
+                if (index !== -1) {
+                    updatedSavedMovies.splice(index, 1);
+                }
+                setSavedMovies(updatedSavedMovies);
+            })
+            .catch(error => console.log(error));
+    }
+
+    function handleSearchSubmit(searchInputValue, isShortFilmChecked) {
+        setLoading(true);
+
+        if (!searchInputValue) {
+            if (location.pathname === '/movies') {
+                setErrorMessage("Нужно ввести ключевое слово");
+                setLoading(false);
+                return;
+            }
+            if (location.pathname === '/saved-movies') {
+                setFilteredMovies(savedMovies);
+                setLoading(false);
+                return;
+            }
+        }
+
+        setErrorMessage('');
+
+        const filteredMovies = movies.filter((movie) => {
+            const russianTitle = movie.nameRU
+                .toLowerCase()
+                .includes(searchInputValue.toLowerCase());
+            const englishTitle = movie.nameEN
+                .toLowerCase()
+                .includes(searchInputValue.toLowerCase());
+            const isShortFilm = movie.duration <= 40;
+
+            return (isShortFilmChecked ? isShortFilm : true) && (russianTitle || englishTitle);
+        });
+
+        console.log(filteredMovies);
+
+        if (filteredMovies.length === 0) {
+            setErrorMessage("Ничего не найдено");
+        } else {
+            setFilteredMovies(filteredMovies);
+        }
+
+        setLoading(false);
+    }
 
     function toggleBurgerMenuClick() {
         setBurgerMenuOpen(!isBurgerMenuOpen);
@@ -172,6 +257,12 @@ function App() {
                             component={Movies}
                             isLoggedIn={isLoggedIn}
                             isLoading={isLoading}
+                            onLikeClick={handleAddMovieToFavorite}
+                            onDeleteClick={handleDeleteMovie}
+                            savedMovies={savedMovies}
+                            onSearch={handleSearchSubmit}
+                            filteredMovies={filteredMovies}
+                            errorMessage={errorMessage}
                         />}/>
                     <Route
                         path='/saved-movies'
@@ -179,6 +270,11 @@ function App() {
                             component={SavedMovies}
                             isLoggedIn={isLoggedIn}
                             isLoading={isLoading}
+                            onDeleteClick={handleDeleteMovie}
+                            onSearch={handleSearchSubmit}
+                            savedMovies={savedMovies}
+                            filteredMovies={filteredMovies}
+                            errorMessage={errorMessage}
                         />}/>
                     <Route
                         path='/profile'
