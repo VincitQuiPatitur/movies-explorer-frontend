@@ -32,7 +32,7 @@ class MainApi {
                 duration: movie.duration,
                 year: movie.year,
                 description: movie.description,
-                image: `${this._movieUrl}${movie.image.url}`,
+                image: `https://api.nomoreparties.co${movie.image.url}`,
                 trailerLink: movie.trailerLink,
                 thumbnail: `${this._movieUrl}${movie.image.url}`,
                 movieId: movie.id,

@@ -22,13 +22,18 @@ function MoviesCard(props) {
     }
 
     function handleDeleteMovieClick() {
-        const movieToDelete = props.savedMovies.find(movie => movie.movieId === props.movie.id);
-        props.onDeleteClick(movieToDelete);
+        if (location.pathname === '/movies') {
+            const movieToDelete = props.savedMovies.find(movie => movie.movieId === props.movie.id);
+            props.onDeleteClick(movieToDelete);
+        }
+        if (location.pathname === '/saved-movies') {
+            props.onDeleteClick(props.movie);
+        }
     }
 
     return (
         <li className="movie">
-            <img src={`https://api.nomoreparties.co${props.movie.image.url}`} alt="Постер фильма"
+            <img src={props.imageLink} alt="Постер фильма"
                  className="movie__image"/>
             <div className="movie__description">
                 <p className="movie__title">{props.movie.nameRU}</p>

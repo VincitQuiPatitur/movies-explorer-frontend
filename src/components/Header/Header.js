@@ -10,20 +10,20 @@ function Header(props) {
 
     return (props.isLoggedIn ?
         (<header className={`header${location.pathname === '/' ? ` header_promo` : ``}`}>
-                    <div className="header__container">
-                        <Logo/>
-                        <div onClick={props.onClick} id='burger_button'
-                             className={`header__menu-burger ${props.isActive ? `header__menu-burger_active` : ``}`}>
-                            <span className="header__menu-burger-span"></span>
-                        </div>
-                        <Navigation/>
-                        <ProfileButton/>
-                        <NavTab
-                            isActive={props.isActive}
-                            closeNavTab={props.onClose}
-                        />
-                    </div>
-            </header>) : location.pathname === '/' ? (
+            <div className="header__container">
+                <Logo/>
+                <div onClick={props.onClick} id='burger_button'
+                     className={`header__menu-burger ${props.isActive ? `header__menu-burger_active` : ``}`}>
+                    <span className="header__menu-burger-span"></span>
+                </div>
+                <Navigation/>
+                <ProfileButton/>
+                <NavTab
+                    isActive={props.isActive}
+                    closeNavTab={props.onClose}
+                />
+            </div>
+        </header>) : location.pathname === '/' ? (
             <header className={'header header_promo'}>
                 <div className="header__container">
                     <Logo/>
@@ -38,7 +38,7 @@ function Header(props) {
                 </div>
             </header>) : null);
 
-      {/*  (<>
+    {/*  (<>
             {(location.pathname === '/' || location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile') ?
                 <header className={`header${location.pathname === '/' ? ` header_promo` : ``}`}>
                     <div className="header__container">
@@ -73,7 +73,8 @@ function Header(props) {
                 </header>
                 : null
             }
-        </>);*/}
+        </>);*/
+    }
 
 }
 

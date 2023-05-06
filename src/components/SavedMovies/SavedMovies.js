@@ -8,6 +8,7 @@ function SavedMovies(props) {
     function handleFilterToggle(isChecked) {
         console.log("Short film filter is toggled to", isChecked);
     }
+
     function handleShortFilmCheckboxChange() {
         setShortSavedFilmChecked(!isShortSavedFilmChecked);
     }

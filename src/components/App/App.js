@@ -187,6 +187,7 @@ function App() {
 
     function handleSearchSubmit(searchInputValue, isShortFilmChecked) {
         setLoading(true);
+        //setFilteredMovies([]);
 
         if (!searchInputValue) {
             if (location.pathname === '/movies') {
@@ -203,7 +204,9 @@ function App() {
 
         setErrorMessage('');
 
-        const filteredMovies = movies.filter((movie) => {
+        const moviesToSearch = (location.pathname === '/movies') ? movies : savedMovies;
+
+        const filteredMovies = moviesToSearch.filter((movie) => {
             const russianTitle = movie.nameRU
                 .toLowerCase()
                 .includes(searchInputValue.toLowerCase());
@@ -215,6 +218,7 @@ function App() {
             return (isShortFilmChecked ? isShortFilm : true) && (russianTitle || englishTitle);
         });
 
+        console.log("найденные фильмы");
         console.log(filteredMovies);
 
         if (filteredMovies.length === 0) {
@@ -225,6 +229,11 @@ function App() {
 
         setLoading(false);
     }
+
+    useEffect(() => {
+        setFilteredMovies([]);
+    }, [location.pathname]);
+
 
     function toggleBurgerMenuClick() {
         setBurgerMenuOpen(!isBurgerMenuOpen);
