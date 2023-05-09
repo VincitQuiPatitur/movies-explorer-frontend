@@ -19,9 +19,10 @@ import * as auth from '../../utils/auth.js';
 function App() {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState({});
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoggedIn, setLoggedIn] = useState(!!localStorage.getItem("jwt"));
     const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [step, setStep] = useState(0);
     const [popupMessage, setPopupMessage] = useState({
         isInfoTooltipOpen: false,
         isSuccess: true,
@@ -34,45 +35,45 @@ function App() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const location = useLocation();
-
-    useEffect(() => {
-        moviesApi.getAllMovies()
-            .then(movies => {
-                console.log(movies);
-                //localStorage.setItem('movies', JSON.stringify(movies));
-                setMovies(movies);
-            })
-            .catch(err => console.log(err));
-    }, []);
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            mainApi.getSavedMovies()
-                .then((result) => {
-                    console.log(result);
-                    setSavedMovies(result.filter(movie => movie.owner === currentUser._id))
-                })
-                .catch(error => console.log(error));
-        }
-    }, [currentUser]);
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            mainApi.getUserInfo()
-                .then(userData => {
-                    setCurrentUser(userData);
-                })
-                .catch(error => console.log(error));
-        }
-    }, [isLoggedIn]);
+    //const token = localStorage.getItem("jwt");
 
     useEffect(() => {
         const token = localStorage.getItem("jwt");
         if (token) {
-            setLoggedIn(true);
-            setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+            setLoading(true);
+            mainApi
+                .getUserInfo()
+                .then((userData) => {
+                    setLoggedIn(true);
+                    setCurrentUser(userData);
+                })
+                .catch((error) => console.log(error))
+                .finally(() => setLoading(false));
         }
     }, []);
+
+
+    useEffect(() => {
+        setLoading(true);
+        moviesApi.getAllMovies()
+            .then(movies => {
+                setMovies(movies);
+            })
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
+    }, []);
+
+    useEffect(() => {
+        if (isLoggedIn && currentUser) {
+            mainApi.getSavedMovies()
+                .then((result) => {
+                    //console.log(result);
+                    //console.log(currentUser._id);
+                    setSavedMovies(result.filter(movie => movie.owner === currentUser._id))
+                })
+                .catch(error => console.log(error));
+        }
+    }, [isLoggedIn, currentUser]);
 
     function handleRegister({name, email, password}) {
         setLoading(true);
@@ -116,13 +117,13 @@ function App() {
                     navigate("/movies");
                 }
             })
-            .catch((err) => {
+            .catch((error) => {
                 setPopupMessage({
                     isInfoTooltipOpen: true,
                     isSuccess: false,
                     message: "Неверный логин или пароль"
                 })
-                console.log(`Ошибка в процессе авторизации пользователя на сайте: ${err}`);
+                console.log(`Ошибка в процессе авторизации пользователя на сайте: ${error}`);
             })
             .finally(() => setLoading(false));
     }
@@ -159,20 +160,14 @@ function App() {
     }
 
     function handleAddMovieToFavorite(movie) {
-        console.log('handleAddMovieToFavorite');
-        console.log(movie)
         mainApi.addMovieToFavorite(movie)
             .then((newMovie) => {
-                console.log(newMovie);
                 setSavedMovies([newMovie, ...savedMovies]);
-                console.log(savedMovies);
             })
             .catch(error => console.log(error));
     }
 
     function handleDeleteMovie(movie) {
-        console.log('deletion');
-        console.log(movie);
         mainApi.deleteMovie(movie._id)
             .then(() => {
                 const updatedSavedMovies = savedMovies.slice();
@@ -187,7 +182,7 @@ function App() {
 
     function handleSearchSubmit(searchInputValue, isShortFilmChecked) {
         setLoading(true);
-        //setFilteredMovies([]);
+        setStep(0);
 
         if (!searchInputValue) {
             if (location.pathname === '/movies') {
@@ -218,14 +213,10 @@ function App() {
             return (isShortFilmChecked ? isShortFilm : true) && (russianTitle || englishTitle);
         });
 
-        console.log("найденные фильмы");
-        console.log(filteredMovies);
-
         if (filteredMovies.length === 0) {
             setErrorMessage("Ничего не найдено");
-        } else {
-            setFilteredMovies(filteredMovies);
         }
+        setFilteredMovies(filteredMovies);
 
         setLoading(false);
     }
@@ -272,6 +263,8 @@ function App() {
                             onSearch={handleSearchSubmit}
                             filteredMovies={filteredMovies}
                             errorMessage={errorMessage}
+                            step={step}
+                            setStep={setStep}
                         />}/>
                     <Route
                         path='/saved-movies'
@@ -284,6 +277,8 @@ function App() {
                             savedMovies={savedMovies}
                             filteredMovies={filteredMovies}
                             errorMessage={errorMessage}
+                            step={step}
+                            setStep={setStep}
                         />}/>
                     <Route
                         path='/profile'

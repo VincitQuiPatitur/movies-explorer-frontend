@@ -4,8 +4,9 @@ import {useLocation} from "react-router-dom";
 
 function MoviesCardList(props) {
     const [cardsToShow, setCardsToShow] = useState(0);
-    const [step, setStep] = useState(0);
+
     const location = useLocation();
+    const isShowing = (props.filteredMovies.length > cardsToShow + props.step || (location.pathname === '/saved-movies' && props.savedMovies.length > cardsToShow + props.step));
 
     useEffect(() => {
         if (window.innerWidth >= 1280) {
@@ -19,9 +20,9 @@ function MoviesCardList(props) {
 
     function handleShowMoreClick() {
         if (window.innerWidth >= 1280) {
-            setStep(step => step + 3);
+            props.setStep(step => step + 4);
         } else {
-            setStep(step => step + 2);
+            props.setStep(step => step + 2);
         }
     }
 
@@ -31,8 +32,11 @@ function MoviesCardList(props) {
                 if (!props.isShortFilmChecked) return true;
                 return movie.duration <= 40;
             });
+            console.log(`cardsToShow: ${cardsToShow}`);
+            console.log(`step: ${props.step}`);
 
-            return filteredMovies.slice(0, cardsToShow + step).map((movie) => (
+
+            return filteredMovies.slice(0, cardsToShow + props.step).map((movie) => (
                 <MoviesCard
                     key={movie.id || movie.movieId}
                     movie={movie}
@@ -42,8 +46,9 @@ function MoviesCardList(props) {
                     imageLink={location.pathname === '/movies' ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
                 />
             ));
+
         } else if (location.pathname === '/saved-movies') {
-            return props.savedMovies.slice(0, cardsToShow + step).map((movie) => (
+            return props.savedMovies.slice(0, cardsToShow + props.step).map((movie) => (
                 <MoviesCard
                     key={movie.id || movie.movieId}
                     movie={movie}
@@ -60,14 +65,16 @@ function MoviesCardList(props) {
 
     return (
         <section className="movies-section">
-            <ul className="movies-section__container">
-                {renderMovies()}
-            </ul>
+            {(props.filteredMovies.length > 0 || (location.pathname === '/saved-movies' && props.savedMovies.length > 0)) &&
+                <ul className="movies-section__container">
+                    {renderMovies()}
+                </ul>
+            }
             <div className="movies-section__more">
-                {props.filteredMovies.length > 0 &&
-                    <button className="movies-section__more-button" onClick={handleShowMoreClick}>Ещё</button>
+                {(isShowing)
+                    ? <button className="movies-section__more-button" onClick={handleShowMoreClick}>Ещё</button>
+                    : <span className="movies-section__more-span">{props.errorMessage}</span>
                 }
-                <span className="movies-section__more-span">{props.errorMessage}</span>
             </div>
         </section>
     );

@@ -1,9 +1,9 @@
 import React from "react";
 
 function SearchForm(props) {
-    function handleShortFilmCheckboxChange(evt) {
+    /*function handleShortFilmCheckboxChange(evt) {
         props.onShortFilmCheckboxChange(evt.target.checked);
-    }
+    }*/
 
     function handleSubmit(evt) {
         evt.preventDefault();
@@ -27,8 +27,8 @@ function SearchForm(props) {
                     <input
                         className="search__sorts-input"
                         type="checkbox"
-                        checked={props.isShortFilmChecked}
-                        onChange={handleShortFilmCheckboxChange}
+                        //checked={props.isShortFilmChecked}
+                        //onChange={handleShortFilmCheckboxChange}
                     />
                     <span className="search__sorts-slider"></span>
                 </label>
