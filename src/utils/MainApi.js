@@ -1,3 +1,5 @@
+import {BASE_URL, MOVIES_URL} from "./constants";
+
 class MainApi {
     constructor({baseUrl, movieUrl}) {
         this._baseUrl = baseUrl;
@@ -82,9 +84,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-    /*baseUrl: 'https://api.movies.kostrova.nomoredomains.monster',*/
-    baseUrl: 'http://localhost:3001',
-    movieUrl: 'https://api.nomoreparties.co/beatfilm-movies'
+    baseUrl: BASE_URL,
+    movieUrl: MOVIES_URL
 })
 
 export default mainApi;
