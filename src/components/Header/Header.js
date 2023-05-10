@@ -8,8 +8,8 @@ import NavTab from "../NavTab/NavTab";
 function Header(props) {
     const location = useLocation();
 
-    return (props.isLoggedIn ?
-        (<header className={`header${location.pathname === '/' ? ` header_promo` : ``}`}>
+    return (props.isLoggedIn && (location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile' || location.pathname === '/') ?
+        (<header className={`header ${location.pathname === '/' ? `header_promo` : ``}`}>
             <div className="header__container">
                 <Logo/>
                 <div onClick={props.onClick} id='burger_button'
