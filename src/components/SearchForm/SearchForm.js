@@ -1,14 +1,17 @@
 import React from "react";
 
 function SearchForm(props) {
-    /*function handleShortFilmCheckboxChange(evt) {
-        props.onShortFilmCheckboxChange(evt.target.checked);
-    }*/
+    const handleCheckboxChange = (e) => {
+        props.setIsChecked(e.target.checked);
+    };
+
+    const handleInputChange = (e) => {
+        props.setSearchInputValue(e.target.value);
+    };
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        const searchInputValue = evt.target.searchInput.value;
-        props.onSearch(searchInputValue, props.isShortFilmChecked);
+        props.onSearch(props.searchInputValue);
     }
 
     return (
@@ -19,6 +22,8 @@ function SearchForm(props) {
                     type="text"
                     className="search__form-input"
                     placeholder='Фильм'
+                    value={props.searchInputValue}
+                    onChange={handleInputChange}
                 />
                 <button className="search__form-button" type="submit"></button>
             </form>
@@ -27,8 +32,8 @@ function SearchForm(props) {
                     <input
                         className="search__sorts-input"
                         type="checkbox"
-                        //checked={props.isShortFilmChecked}
-                        //onChange={handleShortFilmCheckboxChange}
+                        checked={props.isChecked}
+                        onChange={handleCheckboxChange}
                     />
                     <span className="search__sorts-slider"></span>
                 </label>

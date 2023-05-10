@@ -1,35 +1,82 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 function SavedMovies(props) {
-    /*const [isShortSavedFilmChecked, setShortSavedFilmChecked] = React.useState(false);*/
+    const [step, setStep] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [filteredMovies, setFilteredMovies] = useState([]);
 
-    /*function handleFilterToggle(isChecked) {
-        console.log("Short film filter is toggled to", isChecked);
-    }*/
+    useEffect(() => {
+        const isCheckedSavedMoviesValue = localStorage.getItem('isCheckedSavedMovies');
+        if (isCheckedSavedMoviesValue) {
+            props.setIsChecked(JSON.parse(isCheckedSavedMoviesValue));
+        }
 
-    /*function handleShortFilmCheckboxChange() {
-        setShortSavedFilmChecked(!isShortSavedFilmChecked);
-    }*/
+        const searchInputSavedMoviesValue = localStorage.getItem('searchInputSavedMovies');
+        if (searchInputSavedMoviesValue) {
+            props.setSearchInputValue(JSON.parse(searchInputSavedMoviesValue));
+        }
+
+        const filteredSavedMoviesValue = localStorage.getItem('filteredSavedMovies');
+        if (filteredSavedMoviesValue) {
+            setFilteredMovies(JSON.parse(filteredSavedMoviesValue));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('isCheckedSavedMovies', JSON.stringify(props.isChecked));
+        localStorage.setItem('searchInputSavedMovies', JSON.stringify(props.searchInputValue));
+    }, [props.isChecked, props.searchInputValue]);
+
+    useEffect(() => {
+        if (filteredMovies.length > 0) {
+            localStorage.setItem('filteredSavedMovies', JSON.stringify(filteredMovies));
+        }
+    }, [filteredMovies]);
+
+    const handleSearch = (searchInputValue) => {
+        setStep(0);
+        if (!searchInputValue) {
+            setFilteredMovies(props.savedMovies);
+            return;
+        }
+        setErrorMessage('');
+
+        const filteredMovies = props.savedMovies.filter((movie) => {
+            const russianTitle = movie.nameRU
+                .toLowerCase()
+                .includes(searchInputValue.toLowerCase());
+            const englishTitle = movie.nameEN
+                .toLowerCase()
+                .includes(searchInputValue.toLowerCase());
+            return russianTitle || englishTitle;
+        });
+
+        if (filteredMovies.length === 0) {
+            setErrorMessage("Ничего не найдено");
+        }
+        localStorage.setItem('filteredSavedMovies', JSON.stringify(filteredMovies));
+        setFilteredMovies(filteredMovies)
+    };
 
     return (
         <div className="movies">
             <SearchForm
-                //onFilterToggle={handleFilterToggle}
-                //isShortFilmChecked={isShortSavedFilmChecked}
-                //onShortFilmCheckboxChange={handleShortFilmCheckboxChange}
-                onSearch={props.onSearch}
+                onSearch={handleSearch}
+                isChecked={props.isChecked}
+                setIsChecked={props.setIsChecked}
+                searchInputValue={props.searchInputValue}
+                setSearchInputValue={props.setSearchInputValue}
             />
             <MoviesCardList
-                //movies={movies}
-                filteredMovies={props.filteredMovies}
+                filteredMovies={filteredMovies}
                 savedMovies={props.savedMovies}
-                //isShortFilmChecked={isShortSavedFilmChecked}
+                isChecked={props.isChecked}
                 onDeleteClick={props.onDeleteClick}
-                errorMessage={props.errorMessage}
-                step={props.step}
-                setStep={props.setStep}
+                errorMessage={errorMessage}
+                step={step}
+                setStep={setStep}
             />
         </div>
     );

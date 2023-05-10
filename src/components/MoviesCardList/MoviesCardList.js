@@ -27,40 +27,32 @@ function MoviesCardList(props) {
     }
 
     const renderMovies = () => {
+        let moviesToRender = [];
+
         if (location.pathname === '/movies' || (location.pathname === '/saved-movies' && props.filteredMovies.length > 0)) {
-            const filteredMovies = props.filteredMovies.filter((movie) => {
-                if (!props.isShortFilmChecked) return true;
-                return movie.duration <= 40;
-            });
-            console.log(`cardsToShow: ${cardsToShow}`);
-            console.log(`step: ${props.step}`);
+            moviesToRender = props.filteredMovies;
 
-
-            return filteredMovies.slice(0, cardsToShow + props.step).map((movie) => (
-                <MoviesCard
-                    key={movie.id || movie.movieId}
-                    movie={movie}
-                    onLikeClick={props.onLikeClick}
-                    onDeleteClick={props.onDeleteClick}
-                    savedMovies={props.savedMovies}
-                    imageLink={location.pathname === '/movies' ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
-                />
-            ));
-
+            if (props.isChecked) {
+                moviesToRender = moviesToRender.filter(movie => movie.duration <= 40);
+            }
         } else if (location.pathname === '/saved-movies') {
-            return props.savedMovies.slice(0, cardsToShow + props.step).map((movie) => (
-                <MoviesCard
-                    key={movie.id || movie.movieId}
-                    movie={movie}
-                    onLikeClick={props.onLikeClick}
-                    onDeleteClick={props.onDeleteClick}
-                    savedMovies={props.savedMovies}
-                    imageLink={movie.image}
-                />
-            ));
+            moviesToRender = props.savedMovies;
         } else {
             return null;
         }
+
+        const moviesToShow = moviesToRender.slice(0, cardsToShow + props.step);
+
+        return moviesToShow.map(movie => (
+            <MoviesCard
+                key={movie.id || movie.movieId}
+                movie={movie}
+                onLikeClick={props.onLikeClick}
+                onDeleteClick={props.onDeleteClick}
+                savedMovies={props.savedMovies}
+                imageLink={location.pathname === '/movies' ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
+            />
+        ));
     }
 
     return (

@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -11,7 +11,7 @@ import Header from "../Header/Header";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import * as auth from '../../utils/auth.js';
@@ -22,7 +22,6 @@ function App() {
     const [isLoggedIn, setLoggedIn] = useState(!!localStorage.getItem("jwt"));
     const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
     const [isLoading, setLoading] = useState(false);
-    const [step, setStep] = useState(0);
     const [popupMessage, setPopupMessage] = useState({
         isInfoTooltipOpen: false,
         isSuccess: true,
@@ -31,11 +30,11 @@ function App() {
 
     const [movies, setMovies] = useState([]);
     const [savedMovies, setSavedMovies] = useState([]);
-    const [filteredMovies, setFilteredMovies] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
 
-    const location = useLocation();
-    //const token = localStorage.getItem("jwt");
+    const [isCheckedMovies, setIsCheckedMovies] = useState(false);
+    const [isCheckedSavedMovies, setIsCheckedSavedMovies] = useState(false);
+    const [searchInputMovies, setSearchInputMovies] = useState('');
+    const [searchInputSavedMovies, setSearchInputSavedMovies] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem("jwt");
@@ -52,7 +51,6 @@ function App() {
         }
     }, []);
 
-
     useEffect(() => {
         setLoading(true);
         moviesApi.getAllMovies()
@@ -67,8 +65,6 @@ function App() {
         if (isLoggedIn && currentUser) {
             mainApi.getSavedMovies()
                 .then((result) => {
-                    //console.log(result);
-                    //console.log(currentUser._id);
                     setSavedMovies(result.filter(movie => movie.owner === currentUser._id))
                 })
                 .catch(error => console.log(error));
@@ -180,52 +176,6 @@ function App() {
             .catch(error => console.log(error));
     }
 
-    function handleSearchSubmit(searchInputValue, isShortFilmChecked) {
-        setLoading(true);
-        setStep(0);
-
-        if (!searchInputValue) {
-            if (location.pathname === '/movies') {
-                setErrorMessage("Нужно ввести ключевое слово");
-                setLoading(false);
-                return;
-            }
-            if (location.pathname === '/saved-movies') {
-                setFilteredMovies(savedMovies);
-                setLoading(false);
-                return;
-            }
-        }
-
-        setErrorMessage('');
-
-        const moviesToSearch = (location.pathname === '/movies') ? movies : savedMovies;
-
-        const filteredMovies = moviesToSearch.filter((movie) => {
-            const russianTitle = movie.nameRU
-                .toLowerCase()
-                .includes(searchInputValue.toLowerCase());
-            const englishTitle = movie.nameEN
-                .toLowerCase()
-                .includes(searchInputValue.toLowerCase());
-            const isShortFilm = movie.duration <= 40;
-
-            return (isShortFilmChecked ? isShortFilm : true) && (russianTitle || englishTitle);
-        });
-
-        if (filteredMovies.length === 0) {
-            setErrorMessage("Ничего не найдено");
-        }
-        setFilteredMovies(filteredMovies);
-
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        setFilteredMovies([]);
-    }, [location.pathname]);
-
-
     function toggleBurgerMenuClick() {
         setBurgerMenuOpen(!isBurgerMenuOpen);
     }
@@ -259,12 +209,12 @@ function App() {
                             isLoading={isLoading}
                             onLikeClick={handleAddMovieToFavorite}
                             onDeleteClick={handleDeleteMovie}
+                            movies={movies}
                             savedMovies={savedMovies}
-                            onSearch={handleSearchSubmit}
-                            filteredMovies={filteredMovies}
-                            errorMessage={errorMessage}
-                            step={step}
-                            setStep={setStep}
+                            isChecked={isCheckedMovies}
+                            setIsChecked={setIsCheckedMovies}
+                            searchInputValue={searchInputMovies}
+                            setSearchInputValue={setSearchInputMovies}
                         />}/>
                     <Route
                         path='/saved-movies'
@@ -273,12 +223,11 @@ function App() {
                             isLoggedIn={isLoggedIn}
                             isLoading={isLoading}
                             onDeleteClick={handleDeleteMovie}
-                            onSearch={handleSearchSubmit}
                             savedMovies={savedMovies}
-                            filteredMovies={filteredMovies}
-                            errorMessage={errorMessage}
-                            step={step}
-                            setStep={setStep}
+                            isChecked={isCheckedSavedMovies}
+                            setIsChecked={setIsCheckedSavedMovies}
+                            searchInputValue={searchInputSavedMovies}
+                            setSearchInputValue={setSearchInputSavedMovies}
                         />}/>
                     <Route
                         path='/profile'
