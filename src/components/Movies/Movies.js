@@ -39,6 +39,7 @@ function Movies(props) {
     const handleSearch = (searchInputValue) => {
         setStep(0);
         if (!searchInputValue) {
+            setFilteredMovies([]);
             setErrorMessage("Нужно ввести ключевое слово");
             return;
         }

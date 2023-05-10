@@ -37,6 +37,7 @@ function SavedMovies(props) {
 
     const handleSearch = (searchInputValue) => {
         setStep(0);
+        console.log(searchInputValue);
         if (!searchInputValue) {
             setFilteredMovies(props.savedMovies);
             return;

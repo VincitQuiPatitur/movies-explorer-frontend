@@ -6,7 +6,6 @@ function MoviesCardList(props) {
     const [cardsToShow, setCardsToShow] = useState(0);
 
     const location = useLocation();
-    const isShowing = (props.filteredMovies.length > cardsToShow + props.step || (location.pathname === '/saved-movies' && props.savedMovies.length > cardsToShow + props.step));
 
     useEffect(() => {
         if (window.innerWidth >= 1280) {
@@ -35,10 +34,6 @@ function MoviesCardList(props) {
             if (props.isChecked) {
                 moviesToRender = moviesToRender.filter(movie => movie.duration <= 40);
             }
-        } else if (location.pathname === '/saved-movies') {
-            moviesToRender = props.savedMovies;
-        } else {
-            return null;
         }
 
         const moviesToShow = moviesToRender.slice(0, cardsToShow + props.step);
@@ -54,6 +49,8 @@ function MoviesCardList(props) {
             />
         ));
     }
+
+    const isShowing = renderMovies().length < props.filteredMovies.length && renderMovies().length >= cardsToShow;
 
     return (
         <section className="movies-section">
