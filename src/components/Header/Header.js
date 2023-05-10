@@ -37,7 +37,6 @@ function Header(props) {
                     </div>
                 </div>
             </header>) : null);
-
 }
 
 export default Header;

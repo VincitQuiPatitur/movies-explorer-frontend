@@ -30,11 +30,7 @@ function App() {
 
     const [movies, setMovies] = useState([]);
     const [savedMovies, setSavedMovies] = useState([]);
-
-    const [isCheckedMovies, setIsCheckedMovies] = useState(false);
-    const [isCheckedSavedMovies, setIsCheckedSavedMovies] = useState(false);
-    const [searchInputMovies, setSearchInputMovies] = useState('');
-    const [searchInputSavedMovies, setSearchInputSavedMovies] = useState('');
+    const [filteredMovies, setFilteredMovies] = useState([]);
 
     useEffect(() => {
         const token = localStorage.getItem("jwt");
@@ -126,6 +122,12 @@ function App() {
 
     function handleLogout() {
         localStorage.removeItem('jwt');
+        localStorage.removeItem('searchInputMovies');
+        localStorage.removeItem('searchInputSavedMovies');
+        localStorage.removeItem('isCheckedMovies');
+        localStorage.removeItem('isCheckedSavedMovies');
+        localStorage.removeItem('filteredAllMovies');
+        localStorage.removeItem('filteredSavedMovies');
         setLoggedIn(false);
     }
 
@@ -155,23 +157,28 @@ function App() {
             .finally(() => setLoading(false));
     }
 
-    function handleAddMovieToFavorite(movie) {
-        mainApi.addMovieToFavorite(movie)
+    function handleAddMovieToFavorite(movieToAdd) {
+        mainApi.addMovieToFavorite(movieToAdd)
             .then((newMovie) => {
-                setSavedMovies([newMovie, ...savedMovies]);
+                setSavedMovies(prevSavedMovies => [newMovie, ...prevSavedMovies]);
             })
             .catch(error => console.log(error));
     }
 
-    function handleDeleteMovie(movie) {
-        mainApi.deleteMovie(movie._id)
+    function handleDeleteMovie(movieToDelete) {
+        mainApi.deleteMovie(movieToDelete._id)
             .then(() => {
                 const updatedSavedMovies = savedMovies.slice();
-                const index = updatedSavedMovies.findIndex((m) => m._id === movie._id);
+                const index = updatedSavedMovies.findIndex((m) => m._id === movieToDelete._id);
                 if (index !== -1) {
                     updatedSavedMovies.splice(index, 1);
                 }
                 setSavedMovies(updatedSavedMovies);
+                if (filteredMovies.length > 0) {
+                    const updatedFilteredMovies = filteredMovies.filter(movie => movie._id !== movieToDelete._id);
+                    setFilteredMovies(updatedFilteredMovies);
+                }
+
             })
             .catch(error => console.log(error));
     }
@@ -211,10 +218,6 @@ function App() {
                             onDeleteClick={handleDeleteMovie}
                             movies={movies}
                             savedMovies={savedMovies}
-                            isChecked={isCheckedMovies}
-                            setIsChecked={setIsCheckedMovies}
-                            searchInputValue={searchInputMovies}
-                            setSearchInputValue={setSearchInputMovies}
                         />}/>
                     <Route
                         path='/saved-movies'
@@ -224,10 +227,8 @@ function App() {
                             isLoading={isLoading}
                             onDeleteClick={handleDeleteMovie}
                             savedMovies={savedMovies}
-                            isChecked={isCheckedSavedMovies}
-                            setIsChecked={setIsCheckedSavedMovies}
-                            searchInputValue={searchInputSavedMovies}
-                            setSearchInputValue={setSearchInputSavedMovies}
+                            filteredMovies={filteredMovies}
+                            setFilteredMovies={setFilteredMovies}
                         />}/>
                     <Route
                         path='/profile'

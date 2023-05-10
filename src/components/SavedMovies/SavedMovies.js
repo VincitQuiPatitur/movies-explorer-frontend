@@ -5,41 +5,50 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 function SavedMovies(props) {
     const [step, setStep] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
-    const [filteredMovies, setFilteredMovies] = useState([]);
+    const [isCheckedSavedMovies, setIsCheckedSavedMovies] = useState(false);
+    const [searchInputSavedMovies, setSearchInputSavedMovies] = useState('');
 
     useEffect(() => {
         const isCheckedSavedMoviesValue = localStorage.getItem('isCheckedSavedMovies');
         if (isCheckedSavedMoviesValue) {
-            props.setIsChecked(JSON.parse(isCheckedSavedMoviesValue));
+            setIsCheckedSavedMovies(JSON.parse(isCheckedSavedMoviesValue));
         }
 
         const searchInputSavedMoviesValue = localStorage.getItem('searchInputSavedMovies');
         if (searchInputSavedMoviesValue) {
-            props.setSearchInputValue(JSON.parse(searchInputSavedMoviesValue));
+            setSearchInputSavedMovies(JSON.parse(searchInputSavedMoviesValue));
         }
 
         const filteredSavedMoviesValue = localStorage.getItem('filteredSavedMovies');
         if (filteredSavedMoviesValue) {
-            setFilteredMovies(JSON.parse(filteredSavedMoviesValue));
+            props.setFilteredMovies(JSON.parse(filteredSavedMoviesValue));
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('isCheckedSavedMovies', JSON.stringify(props.isChecked));
-        localStorage.setItem('searchInputSavedMovies', JSON.stringify(props.searchInputValue));
-    }, [props.isChecked, props.searchInputValue]);
+        localStorage.setItem('isCheckedSavedMovies', JSON.stringify(isCheckedSavedMovies));
+        localStorage.setItem('searchInputSavedMovies', JSON.stringify(searchInputSavedMovies));
+    }, [isCheckedSavedMovies, searchInputSavedMovies]);
 
     useEffect(() => {
-        if (filteredMovies.length > 0) {
-            localStorage.setItem('filteredSavedMovies', JSON.stringify(filteredMovies));
+        if (props.filteredMovies.length > 0) {
+            localStorage.setItem('filteredSavedMovies', JSON.stringify(props.filteredMovies));
         }
-    }, [filteredMovies]);
+    }, [props.filteredMovies]);
+
+    useEffect(() => {
+        if (isCheckedSavedMovies) {
+            const filteredSavedMovies = props.savedMovies.filter((savedMovie) => savedMovie.duration <= 40);
+            props.setFilteredMovies(filteredSavedMovies);
+        } else {
+            props.setFilteredMovies(props.savedMovies);
+        }
+    }, [props.savedMovies, isCheckedSavedMovies]);
 
     const handleSearch = (searchInputValue) => {
         setStep(0);
-        console.log(searchInputValue);
         if (!searchInputValue) {
-            setFilteredMovies(props.savedMovies);
+            props.setFilteredMovies(props.savedMovies);
             return;
         }
         setErrorMessage('');
@@ -58,22 +67,23 @@ function SavedMovies(props) {
             setErrorMessage("Ничего не найдено");
         }
         localStorage.setItem('filteredSavedMovies', JSON.stringify(filteredMovies));
-        setFilteredMovies(filteredMovies)
+        props.setFilteredMovies(filteredMovies)
     };
 
     return (
         <div className="movies">
             <SearchForm
                 onSearch={handleSearch}
-                isChecked={props.isChecked}
-                setIsChecked={props.setIsChecked}
-                searchInputValue={props.searchInputValue}
-                setSearchInputValue={props.setSearchInputValue}
+                isChecked={isCheckedSavedMovies}
+                setIsChecked={setIsCheckedSavedMovies}
+                searchInputValue={searchInputSavedMovies}
+                setSearchInputValue={setSearchInputSavedMovies}
             />
             <MoviesCardList
-                filteredMovies={filteredMovies}
+                filteredMovies={props.filteredMovies}
+                setFilteredMovies={props.setFilteredMovies}
                 savedMovies={props.savedMovies}
-                isChecked={props.isChecked}
+                isChecked={isCheckedSavedMovies}
                 onDeleteClick={props.onDeleteClick}
                 errorMessage={errorMessage}
                 step={step}

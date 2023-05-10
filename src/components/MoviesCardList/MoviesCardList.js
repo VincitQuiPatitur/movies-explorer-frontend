@@ -46,6 +46,8 @@ function MoviesCardList(props) {
                 onDeleteClick={props.onDeleteClick}
                 savedMovies={props.savedMovies}
                 imageLink={location.pathname === '/movies' ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
+                filteredMovies={props.filteredMovies}
+                setFilteredMovies={props.setFilteredMovies}
             />
         ));
     }

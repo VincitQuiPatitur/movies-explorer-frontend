@@ -6,16 +6,18 @@ function Movies(props) {
     const [step, setStep] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
+    const [isCheckedMovies, setIsCheckedMovies] = useState(false);
+    const [searchInputMovies, setSearchInputMovies] = useState('');
 
     useEffect(() => {
         const isCheckedMoviesValue = localStorage.getItem('isCheckedMovies');
         if (isCheckedMoviesValue) {
-            props.setIsChecked(JSON.parse(isCheckedMoviesValue));
+            setIsCheckedMovies(JSON.parse(isCheckedMoviesValue));
         }
 
         const searchInputMoviesValue = localStorage.getItem('searchInputMovies');
         if (searchInputMoviesValue) {
-            props.setSearchInputValue(JSON.parse(searchInputMoviesValue));
+            setSearchInputMovies(JSON.parse(searchInputMoviesValue));
         }
 
         const filteredMoviesValue = localStorage.getItem('filteredAllMovies');
@@ -26,9 +28,9 @@ function Movies(props) {
 
 
     useEffect(() => {
-        localStorage.setItem('isCheckedMovies', JSON.stringify(props.isChecked));
-        localStorage.setItem('searchInputMovies', JSON.stringify(props.searchInputValue));
-    }, [props.isChecked, props.searchInputValue]);
+        localStorage.setItem('isCheckedMovies', JSON.stringify(isCheckedMovies));
+        localStorage.setItem('searchInputMovies', JSON.stringify(searchInputMovies));
+    }, [isCheckedMovies, searchInputMovies]);
 
     useEffect(() => {
         if (filteredMovies.length > 0) {
@@ -66,15 +68,15 @@ function Movies(props) {
         <div className='movies'>
             <SearchForm
                 onSearch={handleSearch}
-                isChecked={props.isChecked}
-                setIsChecked={props.setIsChecked}
-                searchInputValue={props.searchInputValue}
-                setSearchInputValue={props.setSearchInputValue}
+                isChecked={isCheckedMovies}
+                setIsChecked={setIsCheckedMovies}
+                searchInputValue={searchInputMovies}
+                setSearchInputValue={setSearchInputMovies}
             />
             <MoviesCardList
                 savedMovies={props.savedMovies}
                 filteredMovies={filteredMovies}
-                isChecked={props.isChecked}
+                isChecked={isCheckedMovies}
                 onLikeClick={props.onLikeClick}
                 onDeleteClick={props.onDeleteClick}
                 errorMessage={errorMessage}

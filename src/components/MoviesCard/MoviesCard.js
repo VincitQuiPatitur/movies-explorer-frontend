@@ -1,11 +1,5 @@
 import React from "react";
-import {useLocation} from "react-router-dom";
-
-/* 3 вида состояния кнопки:
-    кнопка не активна - класс movie__favorite-button
-    кнопка активна - добавляется класс movie__favorite-button_added
-    кнопка в профиле сохранненных фильмов - добавляется класс movie__favorite-button_delete
-    */
+import {Link, useLocation} from "react-router-dom";
 
 function MoviesCard(props) {
     const location = useLocation();
@@ -33,8 +27,10 @@ function MoviesCard(props) {
 
     return (
         <li className="movie">
+            <Link to={props.movie.trailerLink} target="_blank">
             <img src={props.imageLink} alt="Постер фильма"
                  className="movie__image"/>
+            </Link>
             <div className="movie__description">
                 <p className="movie__title">{props.movie.nameRU}</p>
                 {location.pathname === '/movies' &&
