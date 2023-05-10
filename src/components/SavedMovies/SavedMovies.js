@@ -46,9 +46,11 @@ function SavedMovies(props) {
     }, [props.savedMovies, isCheckedSavedMovies]);
 
     const handleSearch = (searchInputValue) => {
+        props.setLoading(true);
         setStep(0);
         if (!searchInputValue) {
             props.setFilteredMovies(props.savedMovies);
+            props.setLoading(false);
             return;
         }
         setErrorMessage('');
@@ -67,7 +69,8 @@ function SavedMovies(props) {
             setErrorMessage("Ничего не найдено");
         }
         localStorage.setItem('filteredSavedMovies', JSON.stringify(filteredMovies));
-        props.setFilteredMovies(filteredMovies)
+        props.setFilteredMovies(filteredMovies);
+        props.setLoading(false);
     };
 
     return (

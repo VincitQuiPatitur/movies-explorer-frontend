@@ -39,10 +39,12 @@ function Movies(props) {
     }, [filteredMovies]);
 
     const handleSearch = (searchInputValue) => {
+        props.setLoading(true);
         setStep(0);
         if (!searchInputValue) {
             setFilteredMovies([]);
             setErrorMessage("Нужно ввести ключевое слово");
+            props.setLoading(false);
             return;
         }
         setErrorMessage('');
@@ -62,6 +64,7 @@ function Movies(props) {
         }
         localStorage.setItem('filteredAllMovies', JSON.stringify(filteredMovies));
         setFilteredMovies(filteredMovies);
+        props.setLoading(false);
     };
 
     return (

@@ -213,6 +213,7 @@ function App() {
                             component={Movies}
                             isLoggedIn={isLoggedIn}
                             isLoading={isLoading}
+                            setLoading={setLoading}
                             onLikeClick={handleAddMovieToFavorite}
                             onDeleteClick={handleDeleteMovie}
                             movies={movies}
@@ -224,6 +225,7 @@ function App() {
                             component={SavedMovies}
                             isLoggedIn={isLoggedIn}
                             isLoading={isLoading}
+                            setLoading={setLoading}
                             onDeleteClick={handleDeleteMovie}
                             savedMovies={savedMovies}
                             filteredMovies={filteredMovies}
