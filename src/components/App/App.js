@@ -33,8 +33,7 @@ function App() {
     const [filteredMovies, setFilteredMovies] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem("jwt");
-        if (token) {
+        if (isLoggedIn) {
             setLoading(true);
             mainApi
                 .getUserInfo()
@@ -45,7 +44,7 @@ function App() {
                 .catch((error) => console.log(error))
                 .finally(() => setLoading(false));
         }
-    }, []);
+    }, [isLoggedIn]);
 
     useEffect(() => {
         setLoading(true);
