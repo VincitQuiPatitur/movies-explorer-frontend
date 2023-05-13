@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -240,18 +240,8 @@ function App() {
                             onLogout={handleLogout}
                             isLoading={isLoading}
                         />}/>
-                    <Route
-                        path='/signin'
-                        element={<Login
-                            onClose={closeElement}
-                            onLogin={handleLogin}
-                        />}/>
-                    <Route
-                        path='/signup'
-                        element={<Register
-                            onClose={closeElement}
-                            onRegister={handleRegister}
-                        />}/>
+                    <Route path='/signup' element={!isLoggedIn ? (<Register onClose={closeElement} onRegister={handleRegister} />) : (<Navigate to='/movies' replace />) } />
+                    <Route path='/signin' element={!isLoggedIn ? (<Login onClose={closeElement} onLogin={handleLogin} />) : (<Navigate to='/movies' replace />) } />
                     <Route
                         path='/*'
                         element={<NotFoundPage/>}/>
