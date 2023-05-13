@@ -1,4 +1,4 @@
-import React, {useContext, useEffect } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useFormValidation} from "../../hooks/useFormValidation";
 import Preloader from "../Preloader/Preloader";
@@ -6,6 +6,7 @@ import Preloader from "../Preloader/Preloader";
 function Profile(props) {
     const {handleChange, value, errors, isValueValid, resetForm} = useFormValidation();
     const currentUser = useContext(CurrentUserContext);
+    const [isFormChanged, setFormChanged] = useState(false);
 
     useEffect(() => {
         if (currentUser) resetForm(currentUser, {}, true);
@@ -20,6 +21,11 @@ function Profile(props) {
             email: value.email
         });
     }
+
+    useEffect(() => {
+        const isChanged = value.name !== currentUser.name || value.email !== currentUser.email;
+        setFormChanged(isChanged);
+    }, [value, currentUser]);
 
     return (
         <>
@@ -54,8 +60,12 @@ function Profile(props) {
                         <span className="profile__form-error">{errors.email}</span>
                     </label>
                 </fieldset>
-                <button type="submit"
-                        className={`profile__update-button ${!isValueValid && 'profile__update-button_inactive'}`}>Редактировать
+                <button
+                    type="submit"
+                    className={`profile__update-button ${(!isValueValid || !isFormChanged) && "profile__update-button_inactive"}`}
+                    disabled={!isValueValid || !isFormChanged}
+                >
+                    Редактировать
                 </button>
                 <a href="/" className="profile__signout-button" onClick={props.onLogout}>Выйти из аккаунта</a>
             </form>
