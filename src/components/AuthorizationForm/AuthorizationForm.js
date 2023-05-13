@@ -21,6 +21,7 @@ function AuthorizationForm(props) {
                                 value={name || ''}
                                 onChange={props.onChange}
                                 className="authorization__form-input"
+                                disabled={props.isLoading}
                             />
                             <span className="authorization__form-error">{props.errors.name}</span>
                         </label>
@@ -35,6 +36,7 @@ function AuthorizationForm(props) {
                             value={email || ''}
                             className="authorization__form-input"
                             onChange={props.onChange}
+                            disabled={props.isLoading}
                         />
                         <span className="authorization__form-error">{props.errors.email}</span>
                     </label>
@@ -47,8 +49,10 @@ function AuthorizationForm(props) {
                             required
                             value={password || ''}
                             onChange={props.onChange}
+                            disabled={props.isLoading}
                             autoComplete="on"
-                            className="authorization__form-input"/>
+                            className="authorization__form-input"
+                        />
                         <span className="authorization__form-error">{props.errors.password}</span>
                     </label>
                 </fieldset>

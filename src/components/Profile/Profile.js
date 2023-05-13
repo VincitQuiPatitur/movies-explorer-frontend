@@ -44,6 +44,7 @@ function Profile(props) {
                             required
                             type="text"
                             className="profile__form-input"
+                            disabled={props.isLoading}
                         />
                         <span className="profile__form-error">{errors.name}</span>
                     </label>
@@ -56,7 +57,9 @@ function Profile(props) {
                             onChange={handleChange}
                             required
                             type="email"
-                            className="profile__form-input"/>
+                            className="profile__form-input"
+                            disabled={props.isLoading}
+                        />
                         <span className="profile__form-error">{errors.email}</span>
                     </label>
                 </fieldset>

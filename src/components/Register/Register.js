@@ -32,6 +32,7 @@ function Register(props) {
                     value={value}
                     errors={errors}
                     isValueValid={isValueValid}
+                    isLoading={props.isLoading}
                 />
             </div>
             {props.isLoading && <Preloader/>}

@@ -240,8 +240,8 @@ function App() {
                             onLogout={handleLogout}
                             isLoading={isLoading}
                         />}/>
-                    <Route path='/signup' element={!isLoggedIn ? (<Register onClose={closeElement} onRegister={handleRegister} />) : (<Navigate to='/movies' replace />) } />
-                    <Route path='/signin' element={!isLoggedIn ? (<Login onClose={closeElement} onLogin={handleLogin} />) : (<Navigate to='/movies' replace />) } />
+                    <Route path='/signup' element={!isLoggedIn ? (<Register onClose={closeElement} onRegister={handleRegister} isLoading={isLoading} />) : (<Navigate to='/movies' replace />) } />
+                    <Route path='/signin' element={!isLoggedIn ? (<Login onClose={closeElement} onLogin={handleLogin} isLoading={isLoading} />) : (<Navigate to='/movies' replace />) } />
                     <Route
                         path='/*'
                         element={<NotFoundPage/>}/>
