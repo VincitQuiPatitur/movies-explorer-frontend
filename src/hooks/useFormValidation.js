@@ -1,4 +1,5 @@
-import {useState, useCallback} from "react";
+import { useState, useCallback } from "react";
+import { EMAIL__REGEX, NAME__REGEX } from "../utils/constants";
 
 export function useFormValidation() {
     const [value, setValue] = useState({});
@@ -9,8 +10,27 @@ export function useFormValidation() {
         const {name, value} = e.target;
 
         setValue((prevValue) => ({...prevValue, [name]: value}));
-        setErrors({...errors, [name]: e.target.validationMessage});
+        setErrors((prevErrors) => ({...prevErrors, [name]: validateField(name, value)}));
         setValueValid(e.target.closest('form').checkValidity());
+    }
+
+    function validateField(name, value) {
+        if (name === "name") {
+            const usernameRegex = NAME__REGEX;
+            if (!usernameRegex.test(value)) {
+                return "Имя пользователя должно содержать от 2 до 30 символов";
+            }
+        } else if (name === "email") {
+            const emailRegex = EMAIL__REGEX;
+            if (!emailRegex.test(value)) {
+                return "Некорректный адрес электронной почты";
+            }
+        } else if (name === "password") {
+            if (value.length < 2) {
+                return "Пароль должен содержать не менее 2 символов";
+            }
+        }
+        return "";
     }
 
     // Очистка формы
