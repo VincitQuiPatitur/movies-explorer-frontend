@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import {SHORT_MOVIE_DURATION} from "../../utils/constants";
 
 function SavedMovies(props) {
     const [step, setStep] = useState(0);
@@ -38,7 +39,7 @@ function SavedMovies(props) {
 
     useEffect(() => {
         if (isCheckedSavedMovies) {
-            const filteredSavedMovies = props.savedMovies.filter((savedMovie) => savedMovie.duration <= 40);
+            const filteredSavedMovies = props.savedMovies.filter((savedMovie) => savedMovie.duration <= SHORT_MOVIE_DURATION);
             props.setFilteredMovies(filteredSavedMovies);
         } else {
             props.setFilteredMovies(props.savedMovies);

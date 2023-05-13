@@ -1,6 +1,16 @@
 import React, {useEffect, useState} from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import {useLocation} from "react-router-dom";
+import {
+    AVERAGE_CARDS_NUMBER,
+    AVERAGE_SCREEN_WIDTH,
+    BIG_CARDS_STEP,
+    LARGE_CARDS_NUMBER,
+    MAX_SCREEN_WIDTH,
+    SHORT_MOVIE_DURATION,
+    SMALL_CARDS_NUMBER,
+    SMALL_CARDS_STEP
+} from "../../utils/constants";
 
 function MoviesCardList(props) {
     const [cardsToShow, setCardsToShow] = useState(0);
@@ -8,20 +18,20 @@ function MoviesCardList(props) {
     const location = useLocation();
 
     useEffect(() => {
-        if (window.innerWidth >= 1280) {
-            setCardsToShow(12);
-        } else if (window.innerWidth >= 768) {
-            setCardsToShow(8);
+        if (window.innerWidth >= MAX_SCREEN_WIDTH) {
+            setCardsToShow(LARGE_CARDS_NUMBER);
+        } else if (window.innerWidth >= AVERAGE_SCREEN_WIDTH) {
+            setCardsToShow(AVERAGE_CARDS_NUMBER);
         } else {
-            setCardsToShow(5);
+            setCardsToShow(SMALL_CARDS_NUMBER);
         }
     }, [location.pathname]);
 
     function handleShowMoreClick() {
-        if (window.innerWidth >= 1280) {
-            props.setStep(step => step + 4);
+        if (window.innerWidth >= MAX_SCREEN_WIDTH) {
+            props.setStep(step => step + BIG_CARDS_STEP);
         } else {
-            props.setStep(step => step + 2);
+            props.setStep(step => step + SMALL_CARDS_STEP);
         }
     }
 
@@ -32,7 +42,7 @@ function MoviesCardList(props) {
             moviesToRender = props.filteredMovies;
 
             if (props.isChecked) {
-                moviesToRender = moviesToRender.filter(movie => movie.duration <= 40);
+                moviesToRender = moviesToRender.filter(movie => movie.duration <= SHORT_MOVIE_DURATION);
             }
         }
 
