@@ -16,3 +16,5 @@ Frontend https://movies.kostrova.nomoredomains.monster
 Backend https://api.movies.kostrova.nomoredomains.monster
 
 [Ссылка на макет](https://disk.yandex.ru/d/UAoKa7WYywNxqA)
+
+[Ссылка на pull request](https://github.com/VincitQuiPatitur/movies-explorer-frontend/pull/2)
