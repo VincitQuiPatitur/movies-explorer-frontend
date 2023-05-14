@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
 function SavedMovies(props) {
     const [step, setStep] = useState(0);
@@ -10,13 +11,13 @@ function SavedMovies(props) {
 
     useEffect(() => {
         localStorage.setItem('savedMovies', JSON.stringify(props.savedMovies));
-    })
+    }, []);
 
     useEffect(() => {
         if (props.filteredMovies.length === 0) {
             props.setFilteredMovies(props.savedMovies);
         }
-    }, [props.savedMovies, props.setFilteredMovies])
+    }, [props.savedMovies, props.setFilteredMovies]);
 
     useEffect(() => {
         return () => {
@@ -47,31 +48,36 @@ function SavedMovies(props) {
         if (filteredMovies.length === 0) {
             setErrorMessage("Ничего не найдено");
         }
+
         localStorage.setItem('filteredSavedMovies', JSON.stringify(filteredMovies));
         props.setFilteredMovies(filteredMovies);
         props.setLoading(false);
     };
 
     return (
-        <div className="movies">
-            <SearchForm
-                onSearch={handleSearch}
-                isChecked={isCheckedSavedMovies}
-                setIsChecked={setIsCheckedSavedMovies}
-                searchInputValue={searchInputSavedMovies}
-                setSearchInputValue={setSearchInputSavedMovies}
-            />
-            <MoviesCardList
-                filteredMovies={props.filteredMovies}
-                setFilteredMovies={props.setFilteredMovies}
-                savedMovies={props.savedMovies}
-                isChecked={isCheckedSavedMovies}
-                onDeleteClick={props.onDeleteClick}
-                errorMessage={errorMessage}
-                step={step}
-                setStep={setStep}
-            />
-        </div>
+        <>
+            <div className="movies">
+                <SearchForm
+                    onSearch={handleSearch}
+                    isChecked={isCheckedSavedMovies}
+                    setIsChecked={setIsCheckedSavedMovies}
+                    searchInputValue={searchInputSavedMovies}
+                    setSearchInputValue={setSearchInputSavedMovies}
+                />
+                <MoviesCardList
+                    filteredMovies={props.filteredMovies}
+                    setFilteredMovies={props.setFilteredMovies}
+                    savedMovies={props.savedMovies}
+                    isChecked={isCheckedSavedMovies}
+                    onDeleteClick={props.onDeleteClick}
+                    errorMessage={errorMessage}
+                    setErrorMessage={setErrorMessage}
+                    step={step}
+                    setStep={setStep}
+                />
+            </div>
+            {props.isLoading && <Preloader/>}
+        </>
     );
 }
 

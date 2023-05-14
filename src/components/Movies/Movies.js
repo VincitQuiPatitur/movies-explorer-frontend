@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
     const [step, setStep] = useState(0);
@@ -68,25 +69,29 @@ function Movies(props) {
     };
 
     return (
-        <div className='movies'>
-            <SearchForm
-                onSearch={handleSearch}
-                isChecked={isCheckedMovies}
-                setIsChecked={setIsCheckedMovies}
-                searchInputValue={searchInputMovies}
-                setSearchInputValue={setSearchInputMovies}
-            />
-            <MoviesCardList
-                savedMovies={props.savedMovies}
-                filteredMovies={filteredMovies}
-                isChecked={isCheckedMovies}
-                onLikeClick={props.onLikeClick}
-                onDeleteClick={props.onDeleteClick}
-                errorMessage={errorMessage}
-                step={step}
-                setStep={setStep}
-            />
-        </div>
+        <>
+            <div className='movies'>
+                <SearchForm
+                    onSearch={handleSearch}
+                    isChecked={isCheckedMovies}
+                    setIsChecked={setIsCheckedMovies}
+                    searchInputValue={searchInputMovies}
+                    setSearchInputValue={setSearchInputMovies}
+                />
+                <MoviesCardList
+                    savedMovies={props.savedMovies}
+                    filteredMovies={filteredMovies}
+                    isChecked={isCheckedMovies}
+                    onLikeClick={props.onLikeClick}
+                    onDeleteClick={props.onDeleteClick}
+                    errorMessage={errorMessage}
+                    setErrorMessage={setErrorMessage}
+                    step={step}
+                    setStep={setStep}
+                />
+            </div>
+            {props.isLoading && <Preloader/>}
+        </>
     );
 }
 

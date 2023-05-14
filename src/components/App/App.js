@@ -156,6 +156,7 @@ function App() {
     }
 
     function handleAddMovieToFavorite(movieToAdd) {
+        setLoading(true);
         mainApi.addMovieToFavorite(movieToAdd)
             .then((newMovie) => {
                 setSavedMovies((prevSavedMovies) => {
@@ -164,10 +165,12 @@ function App() {
                     return updatedMovies;
                 });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error))
+            .finally(() => setLoading(false));
     }
 
     function handleDeleteMovie(movieToDelete) {
+        setLoading(true);
         mainApi.deleteMovie(movieToDelete._id)
             .then(() => {
                 const updatedSavedMovies = savedMovies.slice();
@@ -176,9 +179,11 @@ function App() {
                     updatedSavedMovies.splice(index, 1);
                 }
                 setSavedMovies(updatedSavedMovies);
+                console.log(updatedSavedMovies);
                 localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
     }
 
     function toggleBurgerMenuClick() {
