@@ -10,37 +10,16 @@ function SavedMovies(props) {
     const [searchInputSavedMovies, setSearchInputSavedMovies] = useState('');
 
     useEffect(() => {
-        const isCheckedSavedMoviesValue = localStorage.getItem('isCheckedSavedMovies');
-        if (isCheckedSavedMoviesValue) {
-            setIsCheckedSavedMovies(JSON.parse(isCheckedSavedMoviesValue));
-        }
-
-        const searchInputSavedMoviesValue = localStorage.getItem('searchInputSavedMovies');
-        if (searchInputSavedMoviesValue) {
-            setSearchInputSavedMovies(JSON.parse(searchInputSavedMoviesValue));
-        }
-
-        const filteredSavedMoviesValue = localStorage.getItem('filteredSavedMovies');
-        if (filteredSavedMoviesValue) {
-            props.setFilteredMovies(JSON.parse(filteredSavedMoviesValue));
+        const SavedMoviesValue = localStorage.getItem('SavedMovies');
+        if (SavedMoviesValue) {
+            props.setFilteredMovies(JSON.parse(SavedMoviesValue));
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('isCheckedSavedMovies', JSON.stringify(isCheckedSavedMovies));
-        localStorage.setItem('searchInputSavedMovies', JSON.stringify(searchInputSavedMovies));
-    }, [isCheckedSavedMovies, searchInputSavedMovies]);
-
-    useEffect(() => {
-        if (props.filteredMovies.length > 0) {
-            localStorage.setItem('filteredSavedMovies', JSON.stringify(props.filteredMovies));
-        }
-    }, [props.filteredMovies]);
-
-    useEffect(() => {
         if (isCheckedSavedMovies) {
-            const filteredSavedMovies = props.savedMovies.filter((savedMovie) => savedMovie.duration <= SHORT_MOVIE_DURATION);
-            props.setFilteredMovies(filteredSavedMovies);
+            const SavedMovies = props.savedMovies.filter((savedMovie) => savedMovie.duration <= SHORT_MOVIE_DURATION);
+            props.setFilteredMovies(SavedMovies);
         } else {
             props.setFilteredMovies(props.savedMovies);
         }
@@ -69,7 +48,7 @@ function SavedMovies(props) {
         if (filteredMovies.length === 0) {
             setErrorMessage("Ничего не найдено");
         }
-        localStorage.setItem('filteredSavedMovies', JSON.stringify(filteredMovies));
+        localStorage.setItem('SavedMovies', JSON.stringify(filteredMovies));
         props.setFilteredMovies(filteredMovies);
         props.setLoading(false);
     };

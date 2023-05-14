@@ -168,7 +168,7 @@ function App() {
         mainApi.deleteMovie(movieToDelete._id)
             .then(() => {
                 const updatedSavedMovies = savedMovies.slice();
-                const index = updatedSavedMovies.findIndex((m) => m._id === movieToDelete._id);
+                const index = updatedSavedMovies.findIndex(movie => movie._id === movieToDelete._id);
                 if (index !== -1) {
                     updatedSavedMovies.splice(index, 1);
                 }
@@ -177,7 +177,6 @@ function App() {
                     const updatedFilteredMovies = filteredMovies.filter(movie => movie._id !== movieToDelete._id);
                     setFilteredMovies(updatedFilteredMovies);
                 }
-
             })
             .catch(error => console.log(error));
     }
