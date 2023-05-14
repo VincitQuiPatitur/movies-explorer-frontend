@@ -12,7 +12,8 @@ function Footer() {
                     <div className="footer__under-line">
                         <p className="footer__copyright">&copy; 2023</p>
                         <div className="footer__links">
-                            <Link target="_blank" className="footer__link" to='https://practicum.yandex.ru/'>Яндекс.Практикум</Link>
+                            <Link target="_blank" className="footer__link"
+                                  to='https://practicum.yandex.ru/'>Яндекс.Практикум</Link>
                             <Link target="_blank" className="footer__link" to='https://github.com/'>GitHub</Link>
                         </div>
                     </div>

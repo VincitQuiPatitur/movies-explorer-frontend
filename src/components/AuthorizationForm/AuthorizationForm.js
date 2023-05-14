@@ -56,9 +56,11 @@ function AuthorizationForm(props) {
                         <span className="authorization__form-error">{props.errors.password}</span>
                     </label>
                 </fieldset>
-                <button type="submit" className={`authorization__form-button ${!props.isValueValid && 'authorization__form-button_inactive'}`}>{props.buttonText}</button>
+                <button type="submit"
+                        className={`authorization__form-button ${!props.isValueValid && 'authorization__form-button_inactive'}`}>{props.buttonText}</button>
             </form>
-            <p className="authorization__link">{props.text} <Link className="authorization__link-text" to={props.link}>{props.linkText}</Link></p>
+            <p className="authorization__link">{props.text} <Link className="authorization__link-text"
+                                                                  to={props.link}>{props.linkText}</Link></p>
         </>
     );
 }

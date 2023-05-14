@@ -5,7 +5,7 @@ import {useFormValidation} from "../../hooks/useFormValidation";
 import Preloader from "../Preloader/Preloader";
 
 function Login(props) {
-    const { handleChange, value, errors, isValueValid} = useFormValidation();
+    const {handleChange, value, errors, isValueValid} = useFormValidation();
 
     function handleSubmit(e) {
         e.preventDefault();

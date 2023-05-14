@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Routes, Route, useNavigate, Navigate} from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -11,7 +11,7 @@ import Header from "../Header/Header";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import * as auth from '../../utils/auth.js';
@@ -245,8 +245,12 @@ function App() {
                             onLogout={handleLogout}
                             isLoading={isLoading}
                         />}/>
-                    <Route path='/signup' element={!isLoggedIn ? (<Register onClose={closeElement} onRegister={handleRegister} isLoading={isLoading} />) : (<Navigate to='/movies' replace />) } />
-                    <Route path='/signin' element={!isLoggedIn ? (<Login onClose={closeElement} onLogin={handleLogin} isLoading={isLoading} />) : (<Navigate to='/movies' replace />) } />
+                    <Route path='/signup' element={!isLoggedIn ? (
+                        <Register onClose={closeElement} onRegister={handleRegister} isLoading={isLoading}/>) : (
+                        <Navigate to='/movies' replace/>)}/>
+                    <Route path='/signin' element={!isLoggedIn ? (
+                        <Login onClose={closeElement} onLogin={handleLogin} isLoading={isLoading}/>) : (
+                        <Navigate to='/movies' replace/>)}/>
                     <Route
                         path='/*'
                         element={<NotFoundPage/>}/>

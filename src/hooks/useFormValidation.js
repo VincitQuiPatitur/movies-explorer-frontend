@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { EMAIL__REGEX, NAME__REGEX } from "../utils/constants";
+import {useState, useCallback} from "react";
+import {EMAIL__REGEX, NAME__REGEX} from "../utils/constants";
 
 export function useFormValidation() {
     const [value, setValue] = useState({});
