@@ -16,13 +16,11 @@ export function useFormValidation() {
 
     function validateField(name, value) {
         if (name === "name") {
-            const usernameRegex = NAME__REGEX;
-            if (!usernameRegex.test(value)) {
+            if (!NAME__REGEX.test(value)) {
                 return "Имя пользователя должно содержать от 2 до 30 символов";
             }
         } else if (name === "email") {
-            const emailRegex = EMAIL__REGEX;
-            if (!emailRegex.test(value)) {
+            if (!EMAIL__REGEX.test(value)) {
                 return "Некорректный адрес электронной почты";
             }
         } else if (name === "password") {
