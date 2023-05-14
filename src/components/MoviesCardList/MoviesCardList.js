@@ -14,7 +14,6 @@ import {
 
 function MoviesCardList(props) {
     const [cardsToShow, setCardsToShow] = useState(0);
-
     const location = useLocation();
 
     useEffect(() => {
@@ -37,6 +36,7 @@ function MoviesCardList(props) {
 
     const renderMovies = () => {
         let moviesToRender = [];
+
 
         if (location.pathname === '/movies' || (location.pathname === '/saved-movies' && props.filteredMovies.length > 0)) {
             moviesToRender = props.filteredMovies;

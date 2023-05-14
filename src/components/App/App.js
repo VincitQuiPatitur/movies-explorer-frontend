@@ -122,11 +122,10 @@ function App() {
     function handleLogout() {
         localStorage.removeItem('jwt');
         localStorage.removeItem('searchInputMovies');
-        localStorage.removeItem('searchInputSavedMovies');
         localStorage.removeItem('isCheckedMovies');
-        localStorage.removeItem('isCheckedSavedMovies');
         localStorage.removeItem('filteredAllMovies');
         localStorage.removeItem('filteredSavedMovies');
+        localStorage.removeItem('savedMovies');
         setLoggedIn(false);
     }
 
@@ -159,25 +158,25 @@ function App() {
     function handleAddMovieToFavorite(movieToAdd) {
         mainApi.addMovieToFavorite(movieToAdd)
             .then((newMovie) => {
-                setSavedMovies(prevSavedMovies => [newMovie, ...prevSavedMovies]);
+                setSavedMovies((prevSavedMovies) => {
+                    const updatedMovies = [newMovie, ...prevSavedMovies];
+                    localStorage.setItem('savedMovies', JSON.stringify(updatedMovies));
+                    return updatedMovies;
+                });
             })
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
     }
 
     function handleDeleteMovie(movieToDelete) {
         mainApi.deleteMovie(movieToDelete._id)
             .then(() => {
                 const updatedSavedMovies = savedMovies.slice();
-                const index = updatedSavedMovies.findIndex((m) => m._id === movieToDelete._id);
+                const index = updatedSavedMovies.findIndex(movie => movie._id === movieToDelete._id);
                 if (index !== -1) {
                     updatedSavedMovies.splice(index, 1);
                 }
                 setSavedMovies(updatedSavedMovies);
-                if (filteredMovies.length > 0) {
-                    const updatedFilteredMovies = filteredMovies.filter(movie => movie._id !== movieToDelete._id);
-                    setFilteredMovies(updatedFilteredMovies);
-                }
-
+                localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
             })
             .catch(error => console.log(error));
     }
@@ -228,6 +227,7 @@ function App() {
                             setLoading={setLoading}
                             onDeleteClick={handleDeleteMovie}
                             savedMovies={savedMovies}
+                            setSavedMovies={setSavedMovies}
                             filteredMovies={filteredMovies}
                             setFilteredMovies={setFilteredMovies}
                         />}/>

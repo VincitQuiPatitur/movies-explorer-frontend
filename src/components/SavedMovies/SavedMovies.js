@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import {SHORT_MOVIE_DURATION} from "../../utils/constants";
 
 function SavedMovies(props) {
     const [step, setStep] = useState(0);
@@ -10,51 +9,30 @@ function SavedMovies(props) {
     const [searchInputSavedMovies, setSearchInputSavedMovies] = useState('');
 
     useEffect(() => {
-        const isCheckedSavedMoviesValue = localStorage.getItem('isCheckedSavedMovies');
-        if (isCheckedSavedMoviesValue) {
-            setIsCheckedSavedMovies(JSON.parse(isCheckedSavedMoviesValue));
-        }
-
-        const searchInputSavedMoviesValue = localStorage.getItem('searchInputSavedMovies');
-        if (searchInputSavedMoviesValue) {
-            setSearchInputSavedMovies(JSON.parse(searchInputSavedMoviesValue));
-        }
-
-        const filteredSavedMoviesValue = localStorage.getItem('filteredSavedMovies');
-        if (filteredSavedMoviesValue) {
-            props.setFilteredMovies(JSON.parse(filteredSavedMoviesValue));
-        }
-    }, []);
+        localStorage.setItem('savedMovies', JSON.stringify(props.savedMovies));
+    })
 
     useEffect(() => {
-        localStorage.setItem('isCheckedSavedMovies', JSON.stringify(isCheckedSavedMovies));
-        localStorage.setItem('searchInputSavedMovies', JSON.stringify(searchInputSavedMovies));
-    }, [isCheckedSavedMovies, searchInputSavedMovies]);
-
-    useEffect(() => {
-        if (props.filteredMovies.length > 0) {
-            localStorage.setItem('filteredSavedMovies', JSON.stringify(props.filteredMovies));
-        }
-    }, [props.filteredMovies]);
-
-    useEffect(() => {
-        if (isCheckedSavedMovies) {
-            const filteredSavedMovies = props.savedMovies.filter((savedMovie) => savedMovie.duration <= SHORT_MOVIE_DURATION);
-            props.setFilteredMovies(filteredSavedMovies);
-        } else {
+        if (props.filteredMovies.length === 0) {
             props.setFilteredMovies(props.savedMovies);
         }
-    }, [props.savedMovies, isCheckedSavedMovies]);
+    }, [props.savedMovies, props.setFilteredMovies])
+
+    useEffect(() => {
+        return () => {
+            props.setFilteredMovies([]);
+        };
+    }, []);
 
     const handleSearch = (searchInputValue) => {
         props.setLoading(true);
+        setErrorMessage('');
         setStep(0);
         if (!searchInputValue) {
             props.setFilteredMovies(props.savedMovies);
             props.setLoading(false);
             return;
         }
-        setErrorMessage('');
 
         const filteredMovies = props.savedMovies.filter((movie) => {
             const russianTitle = movie.nameRU

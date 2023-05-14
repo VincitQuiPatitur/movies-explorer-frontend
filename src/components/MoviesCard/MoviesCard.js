@@ -22,14 +22,20 @@ function MoviesCard(props) {
         }
         if (location.pathname === '/saved-movies') {
             props.onDeleteClick(props.movie);
+
+            const updatedFilteredMovies = props.filteredMovies.filter(
+                movie => movie._id !== props.movie._id
+            );
+            props.setFilteredMovies(updatedFilteredMovies);
+            localStorage.setItem('filteredSavedMovies', JSON.stringify(updatedFilteredMovies))
         }
     }
 
     return (
         <li className="movie">
             <Link to={props.movie.trailerLink} target="_blank">
-            <img src={props.imageLink} alt="Постер фильма"
-                 className="movie__image"/>
+                <img src={props.imageLink} alt="Постер фильма"
+                     className="movie__image"/>
             </Link>
             <div className="movie__description">
                 <p className="movie__title">{props.movie.nameRU}</p>
