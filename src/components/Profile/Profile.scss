@@ -86,8 +86,9 @@
     margin-bottom: 16px;
     transition: opacity ease-in-out .2s;
 
-    &:hover {
-      opacity: .6;
+    &_inactive {
+      color: $inactive-tumbler;
+      pointer-events: none;
     }
   }
 

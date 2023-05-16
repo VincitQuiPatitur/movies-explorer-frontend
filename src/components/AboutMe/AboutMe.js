@@ -16,7 +16,8 @@ function AboutMe() {
                             информационные системы и технологии с отличием. Полюбила веб-разработку и стала учиться в
                             Яндекс.Практикуме, чтобы подтянуть свои знания. Нахожусь в активном поиске работы.</p>
                     </div>
-                    <Link target="_blank" to='https://github.com/VincitQuiPatitur' className='student__link'>GitHub</Link>
+                    <Link target="_blank" to='https://github.com/VincitQuiPatitur'
+                          className='student__link'>GitHub</Link>
                 </div>
                 <img src={myPhoto} className='student__photo' alt="Фотография со мной"/>
             </div>

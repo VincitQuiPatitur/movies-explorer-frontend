@@ -1,9 +1,22 @@
 import React from "react";
 import AuthorizationForm from "../AuthorizationForm/AuthorizationForm";
 import Logo from "../Logo/Logo";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import {useFormValidation} from "../../hooks/useFormValidation";
+import Preloader from "../Preloader/Preloader";
 
 function Register(props) {
+    const {handleChange, value, errors, isValueValid} = useFormValidation();
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (!value.name || !value.email || !value.password) return;
+        props.onRegister({
+            name: value.name,
+            email: value.email,
+            password: value.password
+        });
+    }
+
     return (
         <>
             <div className="authorization">
@@ -12,14 +25,17 @@ function Register(props) {
                     title={'Добро пожаловать!'}
                     buttonText={'Зарегистрироваться'}
                     text={'Уже зарегистрированы?'}
-                    link={"/signin"}
-                    linkText={"Войти"}
+                    link={'/signin'}
+                    linkText={'Войти'}
+                    onSubmit={handleSubmit}
+                    onChange={handleChange}
+                    value={value}
+                    errors={errors}
+                    isValueValid={isValueValid}
+                    isLoading={props.isLoading}
                 />
             </div>
-            <InfoTooltip
-                isOpen={props.isOpen}
-                onClose={props.onClose}
-            />
+            {props.isLoading && <Preloader/>}
         </>
     );
 }

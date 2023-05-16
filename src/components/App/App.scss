@@ -9,4 +9,7 @@
   color: $text-color;
   font-family: 'Inter', serif;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
